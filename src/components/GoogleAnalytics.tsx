@@ -1,24 +1,25 @@
 "use client";
 
 import { useEffect } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Script from "next/script";
 import { GA_MEASUREMENT_ID, isGAConfigured, pageview } from "@/lib/analytics";
 
 export default function GoogleAnalytics() {
-  // Don't render anything if GA is not configured
-  if (!isGAConfigured()) {
-    return null;
-  }
-
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const enabled = isGAConfigured();
 
   useEffect(() => {
-    const qs = searchParams?.toString();
-    const url = qs ? `${pathname}?${qs}` : pathname;
+    if (!enabled) return;
+    const qs = typeof window !== "undefined" ? window.location.search : "";
+    const url = qs ? `${pathname}${qs}` : pathname;
     pageview(url);
-  }, [pathname, searchParams]);
+  }, [enabled, pathname]);
+
+  // Don't render anything if GA is not configured
+  if (!enabled) {
+    return null;
+  }
 
   return (
     <>
