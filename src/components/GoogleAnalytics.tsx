@@ -1,19 +1,24 @@
 "use client";
 
+import { useEffect } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 import Script from "next/script";
-
-// Google Analytics 4 Measurement ID
-// Replace with your actual GA4 Measurement ID or set via environment variable
-const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-XXXXXXXXXX";
-
-// Check if GA is configured (not placeholder)
-const isGAConfigured = GA_MEASUREMENT_ID && !GA_MEASUREMENT_ID.includes("XXXXXXXXXX");
+import { GA_MEASUREMENT_ID, isGAConfigured, pageview } from "@/lib/analytics";
 
 export default function GoogleAnalytics() {
   // Don't render anything if GA is not configured
-  if (!isGAConfigured) {
+  if (!isGAConfigured()) {
     return null;
   }
+
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const qs = searchParams?.toString();
+    const url = qs ? `${pathname}?${qs}` : pathname;
+    pageview(url);
+  }, [pathname, searchParams]);
 
   return (
     <>
@@ -27,63 +32,9 @@ export default function GoogleAnalytics() {
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', '${GA_MEASUREMENT_ID}', {
-            page_title: document.title,
-            page_location: window.location.href,
-          });
+          gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: false });
         `}
       </Script>
     </>
   );
 }
-
-// Analytics event tracking helper
-export function trackEvent(
-  action: string,
-  category: string,
-  label?: string,
-  value?: number
-) {
-  if (typeof window !== "undefined" && isGAConfigured) {
-    // eslint-disable-next-line
-    const gtag = (window as unknown as Record<string, ((...args: unknown[]) => void) | undefined>).gtag;
-    if (gtag) {
-      gtag("event", action, {
-        event_category: category,
-        event_label: label,
-        value: value,
-      });
-    }
-  }
-}
-
-// Specific event trackers for common actions
-export const analyticsEvents = {
-  // City page views
-  viewCity: (cityName: string, citySlug: string) => {
-    trackEvent("view_city", "City", cityName);
-  },
-
-  // Affiliate link clicks
-  clickAffiliate: (affiliateName: string, cityName?: string) => {
-    trackEvent("click_affiliate", "Affiliate", `${affiliateName}${cityName ? ` - ${cityName}` : ""}`);
-  },
-
-  // Compare cities
-  compareCities: (cities: string[]) => {
-    trackEvent("compare_cities", "Compare", cities.join(" vs "));
-  },
-
-  // Newsletter signup
-  newsletterSignup: () => {
-    trackEvent("newsletter_signup", "Newsletter", "Footer Signup");
-  },
-
-  // External link clicks
-  clickExternalLink: (linkType: string, url: string) => {
-    trackEvent("click_external", "External Link", `${linkType}: ${url}`);
-  },
-};
-
-// Extend the Window interface for gtag
-// Note: gtag types are declared via @types/gtag.js if needed
