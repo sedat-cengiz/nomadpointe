@@ -1,9 +1,9 @@
 import { MapPin, Home, ExternalLink } from "lucide-react";
-import { City } from "@/types/city";
+import { City, type NeighborhoodVibe, type PriceLevel } from "@/types/city";
 import { getBookingUrl } from "@/lib/affiliates";
 import TrackedAffiliateLink from "@/components/TrackedAffiliateLink";
 
-function formatPriceLevel(level: City["neighborhoods"] extends (infer T)[] ? (T extends { priceLevel: infer P } ? P : never) : never) {
+function formatPriceLevel(level: PriceLevel) {
   switch (level) {
     case "budget":
       return "Budget";
@@ -12,12 +12,12 @@ function formatPriceLevel(level: City["neighborhoods"] extends (infer T)[] ? (T 
     case "premium":
       return "Premium";
     default:
-      return String(level);
+      return level;
   }
 }
 
-function formatVibe(vibe: City["neighborhoods"] extends (infer T)[] ? (T extends { vibe: infer V } ? V : never) : never) {
-  return String(vibe).replace(/-/g, " ");
+function formatVibe(vibe: NeighborhoodVibe) {
+  return vibe.replace(/-/g, " ");
 }
 
 export default function WhereToStay({ city }: { city: City }) {
