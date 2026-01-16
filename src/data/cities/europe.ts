@@ -449,9 +449,9 @@ export const europeCities: City[] = [
     name: "Berlin",
     country: "Germany",
     continent: "Europe",
-    heroImage: "https://images.unsplash.com/photo-1560969184-10fe8719e047?w=1920&q=80",
+    heroImage: "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?w=1920&q=80",
     images: {
-      hero: "https://images.unsplash.com/photo-1560969184-10fe8719e047?w=1920&q=80",
+      hero: "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?w=1920&q=80",
       gallery: [],
     },
     internetSpeed: 100,
@@ -1437,9 +1437,9 @@ export const europeCities: City[] = [
     name: "Tallinn",
     country: "Estonia",
     continent: "Europe",
-    heroImage: "https://images.unsplash.com/photo-1528747045269-390fe33c19a3?w=1920&q=80",
+    heroImage: "https://images.unsplash.com/photo-1560969184-10fe8719e047?w=1920&q=80",
     images: {
-      hero: "https://images.unsplash.com/photo-1528747045269-390fe33c19a3?w=1920&q=80",
+      hero: "https://images.unsplash.com/photo-1560969184-10fe8719e047?w=1920&q=80",
       gallery: [],
     },
     internetSpeed: 100,
