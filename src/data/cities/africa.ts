@@ -179,9 +179,9 @@ export const africaCities: City[] = [
     name: "Marrakech",
     country: "Morocco",
     continent: "Africa",
-    heroImage: "https://images.unsplash.com/photo-1597212618440-806262de4f9b?w=1920&q=80",
+    heroImage: "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=1920&q=80",
     images: {
-      hero: "https://images.unsplash.com/photo-1597212618440-806262de4f9b?w=1920&q=80",
+      hero: "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=1920&q=80",
       gallery: [],
     },
     internetSpeed: 30,

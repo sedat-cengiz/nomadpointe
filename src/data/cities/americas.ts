@@ -8,12 +8,12 @@ export const americasCities: City[] = [
     name: "Medellín",
     country: "Colombia",
     continent: "South America",
-    heroImage: "https://images.unsplash.com/photo-1599413987323-b2b8c0d7d9c8?w=1920&q=80",
+    heroImage: "https://images.unsplash.com/photo-1577587230708-187fdbef4d91?w=1920&q=80",
     images: {
-      hero: "https://images.unsplash.com/photo-1599413987323-b2b8c0d7d9c8?w=1920&q=80",
+      hero: "https://images.unsplash.com/photo-1577587230708-187fdbef4d91?w=1920&q=80",
       gallery: [
         "https://images.unsplash.com/photo-1577587230708-187fdbef4d91?w=800&q=80",
-        "https://images.unsplash.com/photo-1568736333610-eae6e0ab9d7f?w=800&q=80",
+        "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=800&q=80",
       ],
     },
     internetSpeed: 130,
