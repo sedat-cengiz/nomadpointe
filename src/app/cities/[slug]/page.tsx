@@ -17,6 +17,10 @@ import PracticalInfo from "@/components/PracticalInfo";
 import HealthInfo from "@/components/HealthInfo";
 import FinanceInfo from "@/components/FinanceInfo";
 import TransportInfo from "@/components/TransportInfo";
+import Breadcrumb, { generateCityBreadcrumbs, getBreadcrumbStructuredData } from "@/components/Breadcrumb";
+import StructuredData from "@/components/StructuredData";
+import CityFAQ, { generateCityFAQs } from "@/components/CityFAQ";
+import SimilarCities from "@/components/SimilarCities";
 import { getCityBySlug, getAllCitySlugs } from "@/data/cities";
 
 interface PageProps {
@@ -41,33 +45,52 @@ export async function generateMetadata({
     };
   }
 
+  const currentYear = new Date().getFullYear();
+  const coworkingCount = city.coworkingSpaces?.length || 0;
+  const bestMonthsPreview = city.bestMonths.slice(0, 4).join(", ");
+
+  // SEO-optimized title with year and high-value keywords
+  const title = `${city.name} Digital Nomad Guide ${currentYear} - Cost of Living & Top Coworking Spaces`;
+  
+  // Rich description with key metrics for better CTR
+  const description = `${city.name} ${currentYear} complete digital nomad guide. ${city.internetSpeed}+ Mbps internet, $${city.monthlyCost.toLocaleString()}/month cost of living. ${coworkingCount > 0 ? `${coworkingCount}+ coworking spaces, ` : ""}${city.safetyScore}/5 safety. Best months: ${bestMonthsPreview}.`;
+
+  // Enhanced OG description with more context
+  const ogDescription = `Discover ${city.name}, ${city.country} as a digital nomad destination. ${city.shortDescription}`;
+
   return {
-    title: `${city.name} Digital Nomad Guide: Internet, Costs & Visas`,
-    description: `Complete guide to living in ${city.name}, ${city.country} as a digital nomad. Internet speed: ${city.internetSpeed} Mbps, Monthly cost: $${city.monthlyCost}. ${city.shortDescription}`,
+    title,
+    description,
     keywords: [
       `${city.name} digital nomad`,
+      `${city.name} digital nomad ${currentYear}`,
       `${city.name} cost of living`,
+      `${city.name} cost of living ${currentYear}`,
       `${city.name} remote work`,
       `${city.name} coworking`,
+      `${city.name} best coworking spaces`,
       `${city.name} internet speed`,
+      `${city.name} monthly cost`,
+      `${city.name} nomad community`,
       `${city.country} digital nomad`,
+      `work from ${city.name}`,
     ],
     openGraph: {
-      title: `${city.name} Digital Nomad Guide | NomadPoint`,
-      description: city.shortDescription,
+      title: `${city.name} Digital Nomad Guide ${currentYear} | NomadPoint`,
+      description: ogDescription,
       images: [
         {
           url: city.heroImage,
           width: 1200,
           height: 630,
-          alt: `${city.name}, ${city.country}`,
+          alt: `${city.name}, ${city.country} - Digital Nomad Destination`,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${city.name} Digital Nomad Guide | NomadPoint`,
-      description: city.shortDescription,
+      title: `${city.name} Digital Nomad Guide ${currentYear} | NomadPoint`,
+      description: ogDescription,
       images: [city.heroImage],
     },
   };
@@ -80,8 +103,22 @@ export default function CityPage({ params }: PageProps) {
     notFound();
   }
 
+  // Generate breadcrumb data for navigation and structured data
+  const breadcrumbItems = generateCityBreadcrumbs(city);
+  const breadcrumbStructuredData = getBreadcrumbStructuredData(breadcrumbItems);
+  
+  // Generate FAQ data for the FAQ component and structured data
+  const faqData = generateCityFAQs(city);
+
   return (
     <>
+      {/* Structured Data for SEO */}
+      <StructuredData
+        city={city}
+        breadcrumbs={breadcrumbStructuredData}
+        faqs={faqData}
+      />
+
       <Header />
 
       <main className="flex-1">
@@ -135,6 +172,9 @@ export default function CityPage({ params }: PageProps) {
         {/* Content */}
         <section className="py-12 lg:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Breadcrumb Navigation */}
+            <Breadcrumb items={breadcrumbItems} />
+
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
               {/* Main Content - Left Column */}
               <div className="lg:col-span-2 space-y-8">
@@ -177,8 +217,14 @@ export default function CityPage({ params }: PageProps) {
                 {/* Seasonality Tracker */}
                 <SeasonalityTracker city={city} />
 
+                {/* FAQ Section - SEO optimized */}
+                <CityFAQ city={city} />
+
                 {/* Community Links */}
                 <CommunityLinks city={city} />
+
+                {/* Similar Cities - Internal Linking for SEO */}
+                <SimilarCities currentCity={city} />
               </div>
 
               {/* Sidebar - Right Column */}

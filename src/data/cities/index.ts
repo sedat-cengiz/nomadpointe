@@ -27,6 +27,11 @@ export function getAllCitySlugs(): string[] {
   return cities.map((city) => city.slug);
 }
 
+// Helper function to get all cities
+export function getAllCities(): City[] {
+  return cities;
+}
+
 // Filter cities by various criteria
 export function filterCities(options: {
   minSpeed?: number;

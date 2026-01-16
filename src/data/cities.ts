@@ -10,6 +10,7 @@ export {
   oceaniaCities,
   getCityBySlug,
   getAllCitySlugs,
+  getAllCities,
   filterCities,
   getCitiesByNomadScore,
   getCitiesByContinent,
