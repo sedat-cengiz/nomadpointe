@@ -547,9 +547,9 @@ export const asiaCities: City[] = [
     name: "Chiang Mai",
     country: "Thailand",
     continent: "Asia",
-    heroImage: "https://images.unsplash.com/photo-1512553953750-fa63f2648f1c?w=1920&q=80",
+    heroImage: "https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=1920&q=80",
     images: {
-      hero: "https://images.unsplash.com/photo-1512553953750-fa63f2648f1c?w=1920&q=80",
+      hero: "https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=1920&q=80",
       gallery: [
         "https://images.unsplash.com/photo-1528181304800-259b08848526?w=800&q=80",
         "https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=800&q=80",
