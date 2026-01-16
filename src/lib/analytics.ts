@@ -8,12 +8,14 @@
  * 3. Add to .env.local: NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
  */
 
-// Measurement ID from environment variable
-export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+// Measurement ID from environment variable (preferred).
+// Fallback is safe to hardcode (not secret) so analytics works even if env isn't configured.
+export const GA_MEASUREMENT_ID =
+  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-WGNMQES779";
 
 // Check if GA is configured
 export const isGAConfigured = (): boolean => {
-  return Boolean(GA_MEASUREMENT_ID && !GA_MEASUREMENT_ID.includes("YOUR_"));
+  return Boolean(GA_MEASUREMENT_ID && GA_MEASUREMENT_ID.startsWith("G-"));
 };
 
 // Types for GA events
