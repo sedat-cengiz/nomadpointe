@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AffiliateWidget from "@/components/AffiliateWidget";
 import { cities, getCityBySlug } from "@/data/cities";
 import { City, lifestyleOptions, LifestyleType } from "@/types/city";
 import {
@@ -352,7 +353,7 @@ export default function NewTripPage() {
 
                             <div className="text-right mr-2">
                               <div className="font-semibold text-gray-900">
-                                ${item.estimatedCost.toLocaleString()}
+                                ${item.estimatedCost.toLocaleString("en-US")}
                               </div>
                               <div className="text-sm text-gray-500">
                                 {item.nights} nights
@@ -629,7 +630,7 @@ export default function NewTripPage() {
                                 {item.city.name} ({item.nights}n)
                               </span>
                               <span className="text-gray-700">
-                                ${item.estimatedCost.toLocaleString()}
+                                ${item.estimatedCost.toLocaleString("en-US")}
                               </span>
                             </div>
                           ))}
@@ -643,7 +644,7 @@ export default function NewTripPage() {
                             Total Budget
                           </span>
                           <span className="text-2xl font-bold text-primary">
-                            ${totalBudget.toLocaleString()}
+                          ${totalBudget.toLocaleString("en-US")}
                           </span>
                         </div>
                         <p className="text-xs text-gray-500 mt-1">
@@ -675,6 +676,17 @@ export default function NewTripPage() {
                     )}
                     {isSaving ? "Saving..." : "Save Trip"}
                   </button>
+
+                  {/* High-intent affiliate placement */}
+                  {selectedCities.length > 0 && (
+                    <div className="mt-6 pt-6 border-t border-gray-100">
+                      <AffiliateWidget
+                        cityName={selectedCities[0].city.name}
+                        countryName={selectedCities[0].city.country}
+                        placement="trip_planner_summary"
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

@@ -268,7 +268,7 @@ export default function TripsPage() {
                             {trip.total_budget && trip.total_budget > 0 && (
                               <div className="flex items-center gap-1">
                                 <DollarSign className="w-4 h-4" />$
-                                {trip.total_budget.toLocaleString()}
+                                {trip.total_budget.toLocaleString("en-US")}
                               </div>
                             )}
                             <div className="flex items-center gap-1">

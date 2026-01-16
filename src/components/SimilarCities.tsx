@@ -108,7 +108,7 @@ export default function SimilarCities({ currentCity, maxCities = 4 }: SimilarCit
                 </span>
                 <span className="flex items-center gap-1">
                   <DollarSign className="w-3 h-3 text-amber-500" />
-                  ${city.monthlyCost.toLocaleString()}/mo
+                  ${city.monthlyCost.toLocaleString("en-US")}/mo
                 </span>
               </div>
             </div>

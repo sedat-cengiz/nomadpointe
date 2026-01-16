@@ -17,9 +17,13 @@ import PracticalInfo from "@/components/PracticalInfo";
 import HealthInfo from "@/components/HealthInfo";
 import FinanceInfo from "@/components/FinanceInfo";
 import TransportInfo from "@/components/TransportInfo";
+import WhereToStay from "@/components/WhereToStay";
+import DataProvenance from "@/components/DataProvenance";
+import FirstTimeNomadEssentials from "@/components/FirstTimeNomadEssentials";
 import Breadcrumb, { generateCityBreadcrumbs, getBreadcrumbStructuredData } from "@/components/Breadcrumb";
 import StructuredData from "@/components/StructuredData";
-import CityFAQ, { generateCityFAQs } from "@/components/CityFAQ";
+import CityFAQ from "@/components/CityFAQ";
+import { generateCityFAQs } from "@/lib/cityFaq";
 import SimilarCities from "@/components/SimilarCities";
 import { getCityBySlug, getAllCitySlugs } from "@/data/cities";
 
@@ -53,7 +57,7 @@ export async function generateMetadata({
   const title = `${city.name} Digital Nomad Guide ${currentYear} - Cost of Living & Top Coworking Spaces`;
   
   // Rich description with key metrics for better CTR
-  const description = `${city.name} ${currentYear} complete digital nomad guide. ${city.internetSpeed}+ Mbps internet, $${city.monthlyCost.toLocaleString()}/month cost of living. ${coworkingCount > 0 ? `${coworkingCount}+ coworking spaces, ` : ""}${city.safetyScore}/5 safety. Best months: ${bestMonthsPreview}.`;
+  const description = `${city.name} ${currentYear} complete digital nomad guide. ${city.internetSpeed}+ Mbps internet, $${city.monthlyCost.toLocaleString("en-US")}/month cost of living. ${coworkingCount > 0 ? `${coworkingCount}+ coworking spaces, ` : ""}${city.safetyScore}/5 safety. Best months: ${bestMonthsPreview}.`;
 
   // Enhanced OG description with more context
   const ogDescription = `Discover ${city.name}, ${city.country} as a digital nomad destination. ${city.shortDescription}`;
@@ -185,6 +189,9 @@ export default function CityPage({ params }: PageProps) {
                   </p>
                 </div>
 
+                {/* First-time nomad essentials (data-driven) */}
+                <FirstTimeNomadEssentials city={city} />
+
                 {/* Long Description */}
                 <div className="bg-white rounded-2xl border border-gray-100 p-6 md:p-8">
                   <div
@@ -192,6 +199,9 @@ export default function CityPage({ params }: PageProps) {
                     dangerouslySetInnerHTML={{ __html: city.longDescription }}
                   />
                 </div>
+
+                {/* Where to stay (data-driven) */}
+                <WhereToStay city={city} />
 
                 {/* Visa & Legal Information */}
                 <VisaDetails city={city} />
@@ -235,8 +245,15 @@ export default function CityPage({ params }: PageProps) {
                 {/* Budget Calculator */}
                 <BudgetCalculator city={city} />
 
+                {/* Data provenance */}
+                <DataProvenance city={city} />
+
                 {/* Affiliate Widgets */}
-                <AffiliateWidget cityName={city.name} />
+                <AffiliateWidget
+                  cityName={city.name}
+                  countryName={city.country}
+                  placement="city_sidebar"
+                />
               </div>
             </div>
           </div>

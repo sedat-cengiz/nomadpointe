@@ -13,8 +13,9 @@
 // AFFILIATE IDS - Replace with your actual IDs
 // ============================================
 
-// SafetyWing: Sign up at https://www.safetywing.com/affiliates
-export const SAFETYWING_AFFILIATE_ID = "YOUR_SAFETYWING_AFFILIATE_ID";
+// SafetyWing: Ambassador Program
+// Reference ID obtained from SafetyWing Ambassador dashboard
+export const SAFETYWING_AFFILIATE_ID = "26461265";
 
 // Booking.com: Sign up at https://www.booking.com/affiliate-program/
 export const BOOKING_AFFILIATE_ID = "YOUR_BOOKING_AFFILIATE_ID";
@@ -38,23 +39,26 @@ export const WISE_AFFILIATE_ID = "YOUR_WISE_AFFILIATE_ID";
  */
 export const SAFETYWING_URLS = {
   // Main insurance page with affiliate tracking
-  nomadInsurance: `https://safetywing.com/nomad-insurance?referenceID=${SAFETYWING_AFFILIATE_ID}`,
+  nomadInsurance: `https://safetywing.com/nomad-insurance?referenceID=${SAFETYWING_AFFILIATE_ID}&utm_source=${SAFETYWING_AFFILIATE_ID}&utm_medium=Ambassador`,
   
   // Remote health insurance
-  remoteHealth: `https://safetywing.com/remote-health?referenceID=${SAFETYWING_AFFILIATE_ID}`,
+  remoteHealth: `https://safetywing.com/remote-health?referenceID=${SAFETYWING_AFFILIATE_ID}&utm_source=${SAFETYWING_AFFILIATE_ID}&utm_medium=Ambassador`,
   
   // Remote doctor
-  remoteDoctor: `https://safetywing.com/remote-doctor?referenceID=${SAFETYWING_AFFILIATE_ID}`,
+  remoteDoctor: `https://safetywing.com/remote-doctor?referenceID=${SAFETYWING_AFFILIATE_ID}&utm_source=${SAFETYWING_AFFILIATE_ID}&utm_medium=Ambassador`,
+  
+  // Main page with affiliate tracking
+  main: `https://safetywing.com/?referenceID=${SAFETYWING_AFFILIATE_ID}&utm_source=${SAFETYWING_AFFILIATE_ID}&utm_medium=Ambassador`,
   
   // Main affiliate signup page (for reference)
-  affiliateSignup: "https://www.safetywing.com/affiliates",
+  affiliateSignup: "https://www.safetywing.com/ambassador",
 };
 
 /**
  * Generate SafetyWing URL with optional parameters
  */
 export function getSafetyWingUrl(
-  product: "nomadInsurance" | "remoteHealth" | "remoteDoctor" = "nomadInsurance",
+  product: "nomadInsurance" | "remoteHealth" | "remoteDoctor" | "main" = "nomadInsurance",
   utmParams?: {
     source?: string;
     medium?: string;

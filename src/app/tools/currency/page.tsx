@@ -201,7 +201,7 @@ export default function CurrencyConverterPage() {
                     <div className="mt-3 px-4 py-4 bg-emerald-50 rounded-xl">
                       <p className="text-2xl font-bold text-emerald-700">
                         {toCurrencyInfo?.symbol}
-                        {convertedAmount.toLocaleString(undefined, {
+                          {convertedAmount.toLocaleString("en-US", {
                           maximumFractionDigits: 2,
                         })}
                       </p>
@@ -279,7 +279,7 @@ export default function CurrencyConverterPage() {
                         </div>
                         <div className="text-sm text-gray-500">
                           {currency.symbol}
-                          {converted.toLocaleString(undefined, {
+                          {converted.toLocaleString("en-US", {
                             maximumFractionDigits: 0,
                           })}
                         </div>

@@ -2,11 +2,13 @@
 
 import { Shield, Home, Lock, ExternalLink, ArrowLeftRight } from "lucide-react";
 import { getAffiliateConfigs, isAffiliateConfigured } from "@/lib/affiliates";
+import { trackAffiliateClick } from "@/lib/analytics";
 
 interface AffiliateWidgetProps {
   cityName: string;
   countryName?: string;
   limit?: number;
+  placement?: string;
 }
 
 // Map icon names to components
@@ -21,7 +23,8 @@ const iconMap = {
 export default function AffiliateWidget({ 
   cityName, 
   countryName, 
-  limit = 3 
+  limit = 3,
+  placement = "affiliate_widget"
 }: AffiliateWidgetProps) {
   const affiliateConfigs = getAffiliateConfigs(limit);
 
@@ -54,6 +57,7 @@ export default function AffiliateWidget({
                 </p>
                 <a
                   href={url}
+                  onClick={() => trackAffiliateClick(`${affiliate.id}:${placement}`, cityName)}
                   target="_blank"
                   rel="noopener noreferrer sponsored"
                   className={`inline-flex items-center gap-2 mt-3 px-4 py-2 ${affiliate.ctaColor} text-white text-sm font-medium rounded-lg transition-colors`}
@@ -100,6 +104,7 @@ export function InsuranceCTA({
     return (
       <a
         href={url}
+        onClick={() => trackAffiliateClick(`${safetyWingConfig.id}:insurance_cta_compact`)}
         target="_blank"
         rel="noopener noreferrer sponsored"
         className="inline-flex items-center gap-2 text-emerald-600 hover:text-emerald-700 font-medium"
@@ -126,6 +131,7 @@ export function InsuranceCTA({
           </div>
           <a
             href={url}
+            onClick={() => trackAffiliateClick(`${safetyWingConfig.id}:insurance_cta_banner`)}
             target="_blank"
             rel="noopener noreferrer sponsored"
             className="bg-white text-emerald-600 px-6 py-3 rounded-lg font-semibold hover:bg-emerald-50 transition-colors flex items-center gap-2"
@@ -152,6 +158,7 @@ export function InsuranceCTA({
           </p>
           <a
             href={url}
+            onClick={() => trackAffiliateClick(`${safetyWingConfig.id}:insurance_cta_default`)}
             target="_blank"
             rel="noopener noreferrer sponsored"
             className="inline-flex items-center gap-2 mt-3 text-emerald-600 hover:text-emerald-700 font-medium"

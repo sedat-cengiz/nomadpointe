@@ -15,6 +15,7 @@ import {
   Coffee,
 } from "lucide-react";
 import { City } from "@/types/city";
+import { trackAffiliateClick, trackBookingClick } from "@/lib/analytics";
 
 interface BookingWidgetProps {
   city: City;
@@ -32,6 +33,7 @@ export default function BookingWidget({ city, variant = "full" }: BookingWidgetP
   const [checkOut, setCheckOut] = useState("");
   const [guests, setGuests] = useState(1);
   const [selectedType, setSelectedType] = useState("all");
+  const placement = variant === "compact" ? "booking_widget_compact" : "booking_widget_full";
 
   // Generate Booking.com affiliate URL
   const generateBookingUrl = () => {
@@ -51,10 +53,16 @@ export default function BookingWidget({ city, variant = "full" }: BookingWidgetP
     return `${baseUrl}?${params.toString()}`;
   };
 
+  const handleBookingClick = () => {
+    trackBookingClick(city.name);
+    trackAffiliateClick(`booking:${placement}`, city.name);
+  };
+
   if (variant === "compact") {
     return (
       <a
         href={generateBookingUrl()}
+        onClick={handleBookingClick}
         target="_blank"
         rel="noopener noreferrer sponsored"
         className="flex items-center gap-4 bg-white rounded-xl border border-gray-100 p-4 hover:shadow-md transition-all group"
@@ -164,6 +172,7 @@ export default function BookingWidget({ city, variant = "full" }: BookingWidgetP
         {/* Search Button */}
         <a
           href={generateBookingUrl()}
+          onClick={handleBookingClick}
           target="_blank"
           rel="noopener noreferrer sponsored"
           className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold transition-colors"

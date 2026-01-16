@@ -110,7 +110,7 @@ export default function BudgetCalculator({ city }: BudgetCalculatorProps) {
         <div className="flex items-center justify-between mb-4">
           <span className="text-sm text-gray-600">Monthly Cost</span>
           <span className="text-lg font-bold text-gray-900">
-            ${adjustedMonthlyCost.toLocaleString()}
+            ${adjustedMonthlyCost.toLocaleString("en-US")}
           </span>
         </div>
 
@@ -130,7 +130,7 @@ export default function BudgetCalculator({ city }: BudgetCalculatorProps) {
               Total ({duration} {duration === 1 ? "month" : "months"})
             </span>
             <span className="text-2xl font-bold text-primary">
-              ${totalCost.toLocaleString()}
+              ${totalCost.toLocaleString("en-US")}
             </span>
           </div>
         </div>

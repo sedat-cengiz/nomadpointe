@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AffiliateWidget from "@/components/AffiliateWidget";
 import { getCityBySlug } from "@/data/cities";
 import {
   ArrowLeft,
@@ -293,7 +294,7 @@ export default function TripDetailPage({
                                     {tc.estimated_cost && (
                                       <span className="flex items-center gap-1 text-gray-600">
                                         <DollarSign className="w-4 h-4" />$
-                                        {tc.estimated_cost.toLocaleString()}
+                                        {tc.estimated_cost.toLocaleString("en-US")}
                                       </span>
                                     )}
                                     {tc.start_date && (
@@ -411,7 +412,7 @@ export default function TripDetailPage({
                           Total Budget
                         </span>
                         <span className="text-2xl font-bold text-primary">
-                          ${trip.total_budget.toLocaleString()}
+                          ${trip.total_budget.toLocaleString("en-US")}
                         </span>
                       </div>
                       <p className="text-xs text-gray-500 mt-1">
@@ -443,6 +444,17 @@ export default function TripDetailPage({
                           )}
                         </button>
                       </div>
+                    </div>
+                  )}
+
+                  {/* High-intent affiliate placement */}
+                  {(firstCity || trip.trip_cities.length > 0) && (
+                    <div className="mt-6 pt-6 border-t border-gray-100">
+                      <AffiliateWidget
+                        cityName={firstCity?.name || trip.trip_cities[0].city_slug}
+                        countryName={firstCity?.country}
+                        placement="trip_detail_sidebar"
+                      />
                     </div>
                   )}
                 </div>

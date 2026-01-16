@@ -132,7 +132,7 @@ export default function CityCard({
               />
               <span className="text-xs text-gray-500">Monthly</span>
               <span className="text-sm font-semibold text-gray-900">
-                ${city.monthlyCost.toLocaleString()}
+                ${city.monthlyCost.toLocaleString("en-US")}
               </span>
             </div>
 

@@ -11,6 +11,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { City } from "@/types/city";
+import { trackFlightSearchClick } from "@/lib/analytics";
 
 interface FlightSearchWidgetProps {
   city: City;
@@ -99,11 +100,13 @@ export default function FlightSearchWidget({
   const [isRoundTrip, setIsRoundTrip] = useState(false);
 
   const destinationCode = city.transportInfo?.airportCode || getAirportCode(city.name);
+  const placement = variant === "compact" ? "flight_widget_compact" : "flight_widget_full";
 
   if (variant === "compact") {
     return (
       <a
         href={`https://www.skyscanner.com/transport/flights/anywhere/${destinationCode}/`}
+        onClick={() => trackFlightSearchClick(city.name, `skyscanner:${placement}`)}
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center gap-4 bg-white rounded-xl border border-gray-100 p-4 hover:shadow-md transition-all group"
@@ -239,6 +242,7 @@ export default function FlightSearchWidget({
                   destinationCode,
                   departDate || new Date().toISOString().split("T")[0]
                 )}
+                onClick={() => trackFlightSearchClick(city.name, `${provider.id}:${placement}`)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`flex flex-col items-center gap-1 ${provider.color} text-white py-3 px-2 rounded-lg font-medium transition-colors text-center`}

@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AffiliateWidget from "@/components/AffiliateWidget";
 import { cities, getCityBySlug } from "@/data/cities";
 import { City } from "@/types/city";
 
@@ -219,7 +220,7 @@ function CompareContent() {
                 }`}
               >
                 <span className="text-xl font-bold text-gray-900">
-                  ${city.monthlyCost.toLocaleString()}
+                  ${city.monthlyCost.toLocaleString("en-US")}
                 </span>
                 {costWinner === city.slug && (
                   <Trophy className="w-5 h-5 text-yellow-500" />
@@ -521,6 +522,35 @@ function CompareContent() {
               </div>
             ))}
             {selectedCities.length < 3 && <div className="p-4" />}
+          </div>
+        </div>
+      )}
+
+      {/* High-intent affiliate placement */}
+      {selectedCities.length >= 1 && (
+        <div className="mt-8">
+          <div className="bg-white rounded-2xl border border-gray-100 p-6">
+            <div className="flex items-center justify-between gap-4 mb-4">
+              <div>
+                <h2 className="text-lg font-bold text-gray-900">
+                  Nomad Essentials for {selectedCities[0].name}
+                </h2>
+                <p className="text-sm text-gray-500">
+                  Recommended services for planning your stay
+                </p>
+              </div>
+              <Link
+                href={`/cities/${selectedCities[0].slug}`}
+                className="text-sm font-medium text-primary hover:text-blue-700"
+              >
+                View guide
+              </Link>
+            </div>
+            <AffiliateWidget
+              cityName={selectedCities[0].name}
+              countryName={selectedCities[0].country}
+              placement="compare_page"
+            />
           </div>
         </div>
       )}

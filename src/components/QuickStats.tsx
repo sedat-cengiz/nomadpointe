@@ -72,7 +72,7 @@ export default function QuickStats({ city }: QuickStatsProps) {
           <div className="flex-1">
             <div className="text-sm text-gray-500">Monthly Cost</div>
             <div className="font-semibold text-gray-900">
-              ${city.monthlyCost.toLocaleString()}
+            ${city.monthlyCost.toLocaleString("en-US")}
             </div>
           </div>
           <div

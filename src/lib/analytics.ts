@@ -208,7 +208,7 @@ export const trackAffiliateClick = (
   });
 
   // Also track as a conversion event
-  if (typeof window !== "undefined" && window.gtag) {
+  if (typeof window !== "undefined" && window.gtag && isGAConfigured()) {
     window.gtag("event", "conversion", {
       send_to: GA_MEASUREMENT_ID,
       event_category: "Affiliate",
