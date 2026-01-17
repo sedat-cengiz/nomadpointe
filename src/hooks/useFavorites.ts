@@ -9,6 +9,7 @@ export function useFavorites() {
   const { data: session, status } = useSession();
   const [favorites, setFavorites] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const isAuthedWithId = !!session?.user?.id;
 
   // Load favorites from localStorage or API
   useEffect(() => {
@@ -17,10 +18,16 @@ export function useFavorites() {
       
       if (status === "loading") return;
       
-      if (session?.user) {
+      if (isAuthedWithId) {
         // Load from API for authenticated users
         try {
           const response = await fetch("/api/favorites");
+          if (!response.ok) {
+            // Fallback to local favorites if server is unavailable
+            setFavorites(getLocalFavorites());
+            setIsLoading(false);
+            return;
+          }
           const data = await response.json();
           setFavorites(data.favorites || []);
           
@@ -41,12 +48,18 @@ export function useFavorites() {
             localStorage.removeItem(LOCAL_STORAGE_KEY);
             // Reload favorites
             const refreshed = await fetch("/api/favorites");
-            const refreshedData = await refreshed.json();
-            setFavorites(refreshedData.favorites || []);
+            if (refreshed.ok) {
+              const refreshedData = await refreshed.json();
+              setFavorites(refreshedData.favorites || []);
+            } else {
+              // If refresh fails, keep what we have and don't block UX
+              saveLocalFavorites(localFavorites);
+            }
           }
         } catch (error) {
           console.error("Error loading favorites:", error);
-          setFavorites([]);
+          // Fallback to local favorites if server fetch fails
+          setFavorites(getLocalFavorites());
         }
       } else {
         // Load from localStorage for guests
@@ -57,7 +70,7 @@ export function useFavorites() {
     };
 
     loadFavorites();
-  }, [session, status]);
+  }, [isAuthedWithId, status]);
 
   // Get favorites from localStorage
   const getLocalFavorites = (): string[] => {
@@ -78,15 +91,16 @@ export function useFavorites() {
 
   // Toggle favorite
   const toggleFavorite = useCallback(async (citySlug: string) => {
-    const isFavorited = favorites.includes(citySlug);
+    const previousFavorites = favorites;
+    const isFavorited = previousFavorites.includes(citySlug);
     
     // Optimistic update
     const newFavorites = isFavorited
-      ? favorites.filter((slug) => slug !== citySlug)
-      : [...favorites, citySlug];
+      ? previousFavorites.filter((slug) => slug !== citySlug)
+      : [...previousFavorites, citySlug];
     setFavorites(newFavorites);
 
-    if (session?.user) {
+    if (isAuthedWithId) {
       // Update server
       try {
         const response = await fetch("/api/favorites", {
@@ -96,19 +110,20 @@ export function useFavorites() {
         });
         
         if (!response.ok) {
-          // Revert on error
-          setFavorites(favorites);
+          // Keep UX responsive even if server fails; fallback to localStorage
+          console.error("Favorites API request failed:", response.status);
+          saveLocalFavorites(newFavorites);
         }
       } catch (error) {
         console.error("Error toggling favorite:", error);
-        // Revert on error
-        setFavorites(favorites);
+        // Keep UX responsive even if server fails; fallback to localStorage
+        saveLocalFavorites(newFavorites);
       }
     } else {
       // Save to localStorage for guests
       saveLocalFavorites(newFavorites);
     }
-  }, [favorites, session]);
+  }, [favorites, isAuthedWithId]);
 
   // Check if city is favorited
   const isFavorite = useCallback((citySlug: string) => {
@@ -121,7 +136,7 @@ export function useFavorites() {
     toggleFavorite,
     isFavorite,
     count: favorites.length,
-    isAuthenticated: !!session?.user,
+    isAuthenticated: isAuthedWithId,
   };
 }
 

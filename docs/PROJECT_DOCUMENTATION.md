@@ -197,12 +197,28 @@ Uygulamada tanımlı e-posta şablonları:
 
 ### Domain Ayarları
 
-E-postaların `noreply@nomadpoint.com` adresinden gönderilmesi için:
+E-postaların kendi domain'inizden (örn. `noreply@nomadpoint.com`) gönderilmesi için:
 
 1. Resend Dashboard → Domains → Add Domain
 2. `nomadpoint.com` domain'ini ekleyin
 3. DNS kayıtlarını domain sağlayıcınıza ekleyin
 4. Doğrulama yapın
+
+#### Gönderici (From) Ayarı
+
+Domain doğrulanana kadar Resend, bazı `from` adreslerini reddedebilir (örn. doğrulanmamış `@nomadpoint.com`).
+
+Bu nedenle env ile gönderici adresini ayarlıyoruz:
+
+```env
+RESEND_FROM="NomadPoint <onboarding@resend.dev>"
+```
+
+Domain doğrulandıktan sonra:
+
+```env
+RESEND_FROM="NomadPoint <noreply@nomadpoint.com>"
+```
 
 ---
 
@@ -365,6 +381,7 @@ Vercel Dashboard → Settings → Environment Variables bölümünde tanımlanma
 | `AUTH_GITHUB_ID` | GitHub OAuth Client ID | `Iv1.xxx` |
 | `AUTH_GITHUB_SECRET` | GitHub OAuth Secret | `xxx` |
 | `RESEND_API_KEY` | Resend API anahtarı | `re_xxx` |
+| `RESEND_FROM` | Resend gönderici adresi (`From`) | `NomadPoint <onboarding@resend.dev>` |
 | `CONTACT_TO_EMAIL` | Contact form hedef alıcı e-posta (server-only) | `sedatcngz@gmail.com` |
 | `CONTACT_PUBLIC_EMAIL` | UI’da gösterilecek destek e-postası | `support@nomadpoint.com` |
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Google Analytics ID | `G-XXXXXXXXXX` |
@@ -398,6 +415,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=xxx
 
 # Email (opsiyonel)
 RESEND_API_KEY=re_xxx
+RESEND_FROM="NomadPoint <onboarding@resend.dev>"
 CONTACT_TO_EMAIL=sedatcngz@gmail.com
 CONTACT_PUBLIC_EMAIL=support@nomadpoint.com
 

@@ -26,9 +26,18 @@ export async function sendEmail({ to, subject, html, text, replyTo }: SendEmailO
     return { success: false, error: "API key not configured" };
   }
 
+  // IMPORTANT:
+  // Resend requires a verified sender domain unless you use their default sender.
+  // Set RESEND_FROM in env once your domain is verified (e.g. "NomadPoint <noreply@yourdomain.com>").
+  // Until then, default to "onboarding@resend.dev" to avoid "invalid_from_address" errors.
+  const from =
+    process.env.RESEND_FROM ||
+    process.env.EMAIL_FROM ||
+    "NomadPoint <onboarding@resend.dev>";
+
   try {
     const { data, error } = await client.emails.send({
-      from: "NomadPoint <noreply@nomadpoint.com>",
+      from,
       to: [to],
       subject,
       html,

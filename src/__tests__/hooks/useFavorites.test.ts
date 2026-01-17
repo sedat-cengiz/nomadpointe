@@ -217,7 +217,7 @@ describe("useFavorites Hook", () => {
       });
     });
 
-    it("should revert on API error", async () => {
+    it("should keep optimistic favorite and fallback to localStorage on API error", async () => {
       // Initial fetch
       (global.fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
@@ -243,10 +243,11 @@ describe("useFavorites Hook", () => {
       // Optimistic update
       expect(result.current.favorites).toContain("lisbon");
 
-      // After API failure, should revert
+      // After API failure, should keep UI state and save locally
       await waitFor(() => {
-        expect(result.current.favorites).not.toContain("lisbon");
+        expect(mockLocalStorage.setItem).toHaveBeenCalled();
       });
+      expect(result.current.favorites).toContain("lisbon");
     });
   });
 
