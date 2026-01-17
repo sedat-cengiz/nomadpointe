@@ -107,6 +107,12 @@ export default function Footer() {
         <div className="border-t border-gray-800 mt-8 pt-8">
           <div className="flex flex-wrap justify-center gap-6 mb-6">
             <Link
+              href="/contact"
+              className="text-gray-400 hover:text-primary text-sm transition-colors"
+            >
+              Contact
+            </Link>
+            <Link
               href="/privacy"
               className="text-gray-400 hover:text-primary text-sm transition-colors"
             >

@@ -15,9 +15,10 @@ interface SendEmailOptions {
   subject: string;
   html: string;
   text?: string;
+  replyTo?: string;
 }
 
-export async function sendEmail({ to, subject, html, text }: SendEmailOptions) {
+export async function sendEmail({ to, subject, html, text, replyTo }: SendEmailOptions) {
   const client = getResendClient();
   
   if (!client) {
@@ -32,6 +33,7 @@ export async function sendEmail({ to, subject, html, text }: SendEmailOptions) {
       subject,
       html,
       text: text || html.replace(/<[^>]*>/g, ""),
+      replyTo: replyTo ? [replyTo] : undefined,
     });
 
     if (error) {

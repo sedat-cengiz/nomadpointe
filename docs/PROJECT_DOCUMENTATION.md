@@ -365,6 +365,8 @@ Vercel Dashboard → Settings → Environment Variables bölümünde tanımlanma
 | `AUTH_GITHUB_ID` | GitHub OAuth Client ID | `Iv1.xxx` |
 | `AUTH_GITHUB_SECRET` | GitHub OAuth Secret | `xxx` |
 | `RESEND_API_KEY` | Resend API anahtarı | `re_xxx` |
+| `CONTACT_TO_EMAIL` | Contact form hedef alıcı e-posta (server-only) | `sedatcngz@gmail.com` |
+| `CONTACT_PUBLIC_EMAIL` | UI’da gösterilecek destek e-postası | `support@nomadpoint.com` |
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Google Analytics ID | `G-XXXXXXXXXX` |
 | `NEXT_PUBLIC_UNSPLASH_ACCESS_KEY` | Unsplash API key | `xxx` |
 
@@ -396,6 +398,8 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=xxx
 
 # Email (opsiyonel)
 RESEND_API_KEY=re_xxx
+CONTACT_TO_EMAIL=sedatcngz@gmail.com
+CONTACT_PUBLIC_EMAIL=support@nomadpoint.com
 
 # Analytics (opsiyonel)
 NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
