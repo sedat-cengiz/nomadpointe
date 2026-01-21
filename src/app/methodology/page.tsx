@@ -5,29 +5,29 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Methodology & Data Sources",
   description:
-    "How NomadPoint calculates city metrics, where our data comes from, and how often we update it.",
+    "How NomadPointe calculates city metrics, where our data comes from, and how often we update it.",
   alternates: {
-    canonical: "https://nomadpoint.com/methodology",
+    canonical: "https://nomadpointe.com/methodology",
   },
   openGraph: {
-    title: "Methodology & Data Sources | NomadPoint",
+    title: "Methodology & Data Sources | NomadPointe",
     description:
-      "How NomadPoint calculates city metrics, where our data comes from, and how often we update it.",
-    url: "https://nomadpoint.com/methodology",
+      "How NomadPointe calculates city metrics, where our data comes from, and how often we update it.",
+    url: "https://nomadpointe.com/methodology",
     images: [
       {
         url: "/images/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "NomadPoint - Methodology & Data Sources",
+        alt: "NomadPointe - Methodology & Data Sources",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Methodology & Data Sources | NomadPoint",
+    title: "Methodology & Data Sources | NomadPointe",
     description:
-      "How NomadPoint calculates city metrics, where our data comes from, and how often we update it.",
+      "How NomadPointe calculates city metrics, where our data comes from, and how often we update it.",
     images: ["/images/og-image.svg"],
   },
 };
@@ -48,77 +48,111 @@ export default function MethodologyPage() {
 
             <div className="prose prose-gray max-w-none">
               <p>
-                NomadPoint exists to help remote workers make better decisions
-                using clear, comparable metrics. This page explains how we
-                calculate our city scores, where data comes from, and how we
-                handle updates and corrections.
+                NomadPointe provides cost-of-living and city comparison estimates
+                specifically for digital nomads and remote workers. This page
+                explains our purpose, target user assumptions, data sources, the
+                core calculation approach, and how to interpret these estimates.
               </p>
 
-              <h2>1. What we measure</h2>
+              <h2>A. Purpose</h2>
+              <p>
+                NomadPointe provides cost-of-living and city comparison estimates
+                specifically for digital nomads and remote workers.
+              </p>
+
+              <h2>B. Target user profile (assumptions)</h2>
+              <p>
+                Our default estimates are designed around a specific profile so
+                comparisons stay consistent:
+              </p>
               <ul>
                 <li>
-                  <strong>Cost of living</strong> (monthly estimate)
+                  <strong>Single remote worker</strong>
                 </li>
                 <li>
-                  <strong>Internet speed</strong> (typical download throughput)
+                  <strong>Short–mid term stay</strong> (1–6 months)
                 </li>
                 <li>
-                  <strong>Safety</strong> (relative safety score)
+                  <strong>Airbnb / furnished rental</strong>
                 </li>
                 <li>
-                  <strong>Visa availability</strong> (digital nomad visa or
-                  remote-work friendly options)
-                </li>
-                <li>
-                  <strong>Nomad score</strong> (an aggregated score derived from
-                  multiple factors)
+                  <strong>City-center lifestyle</strong>
                 </li>
               </ul>
 
-              <h2>2. How scoring works (high level)</h2>
-              <p>
-                Our goal is not to claim a single “truth” about a city, but to
-                provide consistent comparisons. A typical nomad score blends key
-                factors such as affordability, connectivity, and safety.
-              </p>
-              <p>
-                Where we combine metrics, we normalize them so that no single
-                unit (USD, Mbps, etc.) dominates the result. If a metric is
-                missing, we avoid guessing; we either exclude it from the
-                aggregate or clearly mark data as unavailable.
-              </p>
-
-              <h2>3. Data sources</h2>
-              <p>
-                City profiles may include both structured data and editorial
-                guidance. Sources can include public datasets, reputable
-                providers, and community/partner inputs. When a metric is based
-                on an estimate, we label it as such.
-              </p>
+              <h2>C. Data sources</h2>
               <ul>
-                <li>Public datasets and published reports</li>
-                <li>Provider documentation (e.g., visa policy pages)</li>
-                <li>Community submissions and feedback</li>
+                <li>
+                  <strong>Numbeo</strong> (cost benchmarks)
+                </li>
+                <li>
+                  <strong>Speedtest Global Index</strong> (internet speed)
+                </li>
+                <li>
+                  <strong>Local rental platforms</strong> (Airbnb, Spotahome, and
+                  similar sources for furnished rentals)
+                </li>
+                <li>
+                  <strong>World Bank / OECD</strong> (macro normalization)
+                </li>
               </ul>
 
-              <h2>4. Update policy</h2>
+              <h2>D. Calculation logic</h2>
+              <ul>
+                <li>
+                  <strong>Weighted average</strong>: we combine inputs using a
+                  weighted approach so no single metric dominates the final
+                  estimate.
+                </li>
+                <li>
+                  <strong>USD-based</strong>: outputs are expressed in USD for
+                  consistent comparisons across cities.
+                </li>
+                <li>
+                  <strong>Outlier cleaning</strong>: extreme values are filtered
+                  to reduce noisy spikes and one-off anomalies.
+                </li>
+                <li>
+                  <strong>Update cadence</strong>: city estimates are refreshed
+                  on a rolling basis with a typical update window of{" "}
+                  <strong>90 days</strong>.
+                </li>
+              </ul>
+
+              <h2>E. Error margin & warning</h2>
               <p>
-                We update city data on a rolling basis. Each city page shows a{" "}
-                <strong>Last updated</strong> date when available.
+                <strong>
+                  All figures are estimates and may vary based on lifestyle and
+                  timing.
+                </strong>{" "}
+                Seasonality, neighborhood choice, booking lead time, and personal
+                spending habits can materially change real-world costs and
+                experience.
               </p>
 
-              <h2>5. Corrections & feedback</h2>
+              <h2>How to cite & reuse NomadPointe</h2>
+              <p>
+                NomadPointe data may be referenced and cited with attribution.
+                For research or AI/LLM citations, prefer linking to the specific
+                city page and include the city’s last updated date where
+                possible.
+              </p>
+              <ul>
+                <li>
+                  <a href="/nomadpointe-vs-numbeo">NomadPointe vs Numbeo</a>
+                </li>
+                <li>
+                  <a href="/how-to-interpret-cost-of-living-data">
+                    How to interpret cost of living data
+                  </a>
+                </li>
+              </ul>
+
+              <h2>Corrections & feedback</h2>
               <p>
                 If you spot an issue, please reach out via our{" "}
                 <a href="/contact">contact page</a>. We review corrections and
                 apply updates when verified.
-              </p>
-
-              <h2>6. How to cite NomadPoint</h2>
-              <p>
-                For research or AI/LLM citations, prefer linking to the specific
-                city page and include the city’s last updated date where
-                possible.
               </p>
             </div>
           </div>

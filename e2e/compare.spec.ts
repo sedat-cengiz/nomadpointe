@@ -5,15 +5,15 @@ test.describe("Compare Page", () => {
     await page.goto("/compare");
     
     // Should show message to select cities
-    await expect(page.getByText(/select.*cities/i)).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Select cities to compare/i })).toBeVisible();
   });
 
   test("should compare cities from URL params", async ({ page }) => {
     await page.goto("/compare?cities=digital-nomad-guide-lisbon,digital-nomad-guide-barcelona");
     
     // Should show both cities
-    await expect(page.getByText("Lisbon")).toBeVisible();
-    await expect(page.getByText("Barcelona")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Lisbon" }).first()).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Barcelona" }).first()).toBeVisible();
   });
 
   test("should show comparison metrics", async ({ page }) => {
@@ -23,9 +23,9 @@ test.describe("Compare Page", () => {
     await page.waitForSelector(':text("Internet Speed")', { timeout: 10000 });
     
     // Should show comparison categories
-    await expect(page.getByText(/Internet Speed/i)).toBeVisible();
-    await expect(page.getByText(/Monthly Cost/i)).toBeVisible();
-    await expect(page.getByText(/Safety/i)).toBeVisible();
+    await expect(page.getByText(/Internet Speed/i).first()).toBeVisible();
+    await expect(page.getByText(/Monthly Cost/i).first()).toBeVisible();
+    await expect(page.getByText(/Safety/i).first()).toBeVisible();
   });
 
   test("should allow removing cities from comparison", async ({ page }) => {
@@ -50,9 +50,10 @@ test.describe("Compare Page", () => {
     // Wait for city to load
     await page.waitForSelector(':text("Lisbon")', { timeout: 10000 });
     
-    // Click on city name/link
-    const cityLink = page.locator('a:has-text("Lisbon")').first();
+    // Click the "View guide" link (stable target)
+    const cityLink = page.getByRole("link", { name: /View guide/i }).first();
     if (await cityLink.isVisible()) {
+      await cityLink.scrollIntoViewIfNeeded();
       await cityLink.click();
       await expect(page).toHaveURL(/\/cities\/digital-nomad-guide-lisbon/);
     }

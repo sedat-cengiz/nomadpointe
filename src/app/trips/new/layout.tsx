@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://nomadpoint.com/trips/new",
+    canonical: "https://nomadpointe.com/trips/new",
   },
 };
 

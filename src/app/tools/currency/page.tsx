@@ -144,7 +144,7 @@ export default function CurrencyConverterPage() {
                 This tool converts an amount from one currency to another using exchange rates. It’s meant for fast budgeting (daily, weekly, monthly) when planning a remote-work destination.
               </p>
               <p className="text-sm text-gray-600 mt-2">
-                Canonical URL: <span className="font-medium">nomadpoint.com/tools/currency</span>. Methodology:{" "}
+                Canonical URL: <span className="font-medium">nomadpointe.com/tools/currency</span>. Methodology:{" "}
                 <a className="text-primary hover:underline font-medium" href="/methodology">
                   Methodology & Data Sources
                 </a>

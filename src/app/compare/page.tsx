@@ -612,7 +612,7 @@ export default function ComparePage() {
               </h2>
               <p className="text-sm text-gray-600 mt-2">
                 Use this page to compare up to three cities across key remote-work metrics (internet speed, cost of living, and safety). The canonical URL for this tool is{" "}
-                <span className="font-medium">nomadpoint.com/compare</span>.
+                <span className="font-medium">nomadpointe.com/compare</span>.
               </p>
               <p className="text-sm text-gray-600 mt-2">
                 For how we source and calculate data, see{" "}

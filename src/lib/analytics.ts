@@ -1,6 +1,6 @@
 /**
  * Google Analytics 4 Helper Functions
- * Enhanced for NomadPoint with conversion tracking
+ * Enhanced for NomadPointe with conversion tracking
  * 
  * Setup Instructions:
  * 1. Create a Google Analytics 4 property at https://analytics.google.com

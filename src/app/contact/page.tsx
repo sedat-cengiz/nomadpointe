@@ -6,11 +6,11 @@ import ContactForm from "./ContactForm";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Contact NomadPoint with questions, suggestions, or complaints. We'll get back to you as soon as possible.",
+    "Contact NomadPointe with questions, suggestions, or complaints. We'll get back to you as soon as possible.",
 };
 
 export default function ContactPage() {
-  const publicEmail = process.env.CONTACT_PUBLIC_EMAIL || "support@nomadpoint.com";
+  const publicEmail = process.env.CONTACT_PUBLIC_EMAIL || "support@nomadpointe.com";
 
   return (
     <>

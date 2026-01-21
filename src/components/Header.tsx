@@ -59,7 +59,7 @@ export default function Header({ compareCount = 0 }: HeaderProps) {
               <Globe className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold text-gray-900">
-              Nomad<span className="text-primary">Point</span>
+              Nomad<span className="text-primary">Pointe</span>
             </span>
           </Link>
 
@@ -76,6 +76,18 @@ export default function Header({ compareCount = 0 }: HeaderProps) {
               className="text-gray-600 hover:text-primary transition-colors font-medium"
             >
               Compare
+            </Link>
+            <Link
+              href="/methodology"
+              className="text-gray-600 hover:text-primary transition-colors font-medium"
+            >
+              Methodology
+            </Link>
+            <Link
+              href="/about"
+              className="text-gray-600 hover:text-primary transition-colors font-medium"
+            >
+              About
             </Link>
             <Link
               href="/trips"
@@ -267,6 +279,20 @@ export default function Header({ compareCount = 0 }: HeaderProps) {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Trip Planner
+              </Link>
+              <Link
+                href="/methodology"
+                className="px-4 py-3 text-gray-600 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors font-medium"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Methodology
+              </Link>
+              <Link
+                href="/about"
+                className="px-4 py-3 text-gray-600 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors font-medium"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                About
               </Link>
               <Link
                 href="/tools/currency"

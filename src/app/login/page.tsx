@@ -64,7 +64,7 @@ function LoginContent() {
               <Globe className="w-7 h-7 text-white" />
             </div>
             <span className="text-3xl font-bold text-white">
-              Nomad<span className="text-primary">Point</span>
+              Nomad<span className="text-primary">Pointe</span>
             </span>
           </Link>
 
@@ -75,7 +75,7 @@ function LoginContent() {
           </h1>
 
           <p className="text-lg text-slate-400 mb-12 max-w-md">
-            Join thousands of digital nomads who use NomadPoint to discover,
+            Join thousands of digital nomads who use NomadPointe to discover,
             plan, and track their remote work journeys.
           </p>
 

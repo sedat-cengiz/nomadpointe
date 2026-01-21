@@ -5,7 +5,7 @@ import { Shield, Home, Lock, ArrowLeftRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Affiliate Disclosure",
-  description: "Affiliate Disclosure for NomadPoint - Transparency about our affiliate relationships and how we earn revenue.",
+  description: "Affiliate Disclosure for NomadPointe - Transparency about our affiliate relationships and how we earn revenue.",
 };
 
 export default function AffiliateDisclosurePage() {
@@ -63,7 +63,7 @@ export default function AffiliateDisclosurePage() {
                 📋 Quick Summary
               </h2>
               <p className="text-amber-700">
-                NomadPoint earns money through affiliate partnerships. When you click certain 
+                NomadPointe earns money through affiliate partnerships. When you click certain 
                 links on our site and make a purchase, we may earn a commission at no extra 
                 cost to you. This helps us keep the site running and provide free content.
               </p>
@@ -72,7 +72,7 @@ export default function AffiliateDisclosurePage() {
             <div className="prose prose-gray max-w-none">
               <h2>Our Commitment to Transparency</h2>
               <p>
-                At NomadPoint, we believe in complete transparency with our readers. This page 
+                At NomadPointe, we believe in complete transparency with our readers. This page 
                 discloses our affiliate relationships and explains how we earn revenue while 
                 providing you with valuable content about digital nomad destinations.
               </p>
@@ -160,11 +160,11 @@ export default function AffiliateDisclosurePage() {
                 please don't hesitate to contact us at:
               </p>
               <ul>
-                <li>Email: affiliates@nomadpoint.com</li>
+                <li>Email: affiliates@nomadpointe.com</li>
               </ul>
 
               <p className="mt-8 text-gray-500 text-sm">
-                Thank you for supporting NomadPoint! Your trust means everything to us. 🙏
+                Thank you for supporting NomadPointe! Your trust means everything to us. 🙏
               </p>
             </div>
           </div>

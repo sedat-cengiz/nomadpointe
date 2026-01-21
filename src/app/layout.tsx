@@ -4,10 +4,10 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 import AuthProvider from "@/components/providers/AuthProvider";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://nomadpoint.com"),
+  metadataBase: new URL("https://nomadpointe.com"),
   title: {
-    default: "NomadPoint - Find Your Next Remote Work Hub",
-    template: "%s | NomadPoint",
+    default: "NomadPointe - Find Your Next Remote Work Hub",
+    template: "%s | NomadPointe",
   },
   description:
     "Discover the best cities for digital nomads. Compare internet speeds, cost of living, visa options, and more. Your trusted guide to remote work destinations.",
@@ -21,14 +21,14 @@ export const metadata: Metadata = {
     "nomad visa",
     "coworking",
   ],
-  authors: [{ name: "NomadPoint" }],
-  creator: "NomadPoint",
+  authors: [{ name: "NomadPointe" }],
+  creator: "NomadPointe",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://nomadpoint.com",
-    siteName: "NomadPoint",
-    title: "NomadPoint - Find Your Next Remote Work Hub",
+    url: "https://nomadpointe.com",
+    siteName: "NomadPointe",
+    title: "NomadPointe - Find Your Next Remote Work Hub",
     description:
       "Discover the best cities for digital nomads. Compare internet speeds, cost of living, visa options, and more.",
     images: [
@@ -36,13 +36,13 @@ export const metadata: Metadata = {
         url: "/images/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "NomadPoint - Digital Nomad City Guide",
+        alt: "NomadPointe - Digital Nomad City Guide",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "NomadPoint - Find Your Next Remote Work Hub",
+    title: "NomadPointe - Find Your Next Remote Work Hub",
     description:
       "Discover the best cities for digital nomads. Compare internet speeds, cost of living, visa options, and more.",
     images: ["/images/og-image.svg"],
@@ -65,12 +65,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const baseUrl = "https://nomadpoint.com";
+  const baseUrl = "https://nomadpointe.com";
 
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "NomadPoint",
+    name: "NomadPointe",
     url: baseUrl,
     logo: `${baseUrl}/images/logo.svg`,
   };
@@ -78,11 +78,11 @@ export default function RootLayout({
   const websiteJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "NomadPoint",
+    name: "NomadPointe",
     url: baseUrl,
     publisher: {
       "@type": "Organization",
-      name: "NomadPoint",
+      name: "NomadPointe",
       url: baseUrl,
       logo: `${baseUrl}/images/logo.svg`,
     },

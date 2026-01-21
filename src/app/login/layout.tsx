@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://nomadpoint.com/login",
+    canonical: "https://nomadpointe.com/login",
   },
 };
 

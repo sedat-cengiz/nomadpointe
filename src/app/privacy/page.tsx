@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Privacy Policy for NomadPoint - Learn how we collect, use, and protect your personal information.",
+  description: "Privacy Policy for NomadPointe - Learn how we collect, use, and protect your personal information.",
 };
 
 export default function PrivacyPolicyPage() {
@@ -24,10 +24,10 @@ export default function PrivacyPolicyPage() {
             <div className="prose prose-gray max-w-none">
               <h2>1. Introduction</h2>
               <p>
-                Welcome to NomadPoint ("we," "our," or "us"). We respect your privacy and are 
+                Welcome to NomadPointe ("we," "our," or "us"). We respect your privacy and are 
                 committed to protecting your personal data. This privacy policy explains how we 
                 collect, use, disclose, and safeguard your information when you visit our website 
-                nomadpoint.com (the "Site").
+                nomadpointe.com (the "Site").
               </p>
 
               <h2>2. Information We Collect</h2>
@@ -117,7 +117,7 @@ export default function PrivacyPolicyPage() {
                 <li>Right to object to processing</li>
               </ul>
               <p>
-                To exercise any of these rights, please contact us at privacy@nomadpoint.com.
+                To exercise any of these rights, please contact us at privacy@nomadpointe.com.
               </p>
 
               <h2>9. Children's Privacy</h2>
@@ -147,8 +147,8 @@ export default function PrivacyPolicyPage() {
                 If you have any questions about this Privacy Policy, please contact us:
               </p>
               <ul>
-                <li>Email: privacy@nomadpoint.com</li>
-                <li>Website: nomadpoint.com</li>
+                <li>Email: privacy@nomadpointe.com</li>
+                <li>Website: nomadpointe.com</li>
               </ul>
             </div>
           </div>

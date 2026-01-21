@@ -7,5 +7,5 @@ Disallow: /profile
 Disallow: /login
 Disallow: /trips/
 
-Sitemap: https://nomadpoint.com/sitemap.xml
+Sitemap: https://nomadpointe.com/sitemap.xml
 

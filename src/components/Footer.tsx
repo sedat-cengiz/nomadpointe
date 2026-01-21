@@ -16,7 +16,7 @@ export default function Footer() {
                 <Globe className="w-5 h-5 text-white" />
               </div>
               <span className="text-xl font-bold text-white">
-                Nomad<span className="text-primary">Point</span>
+                Nomad<span className="text-primary">Pointe</span>
               </span>
             </Link>
             <p className="text-gray-400 max-w-md">
@@ -48,6 +48,22 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/methodology"
+                  className="hover:text-primary transition-colors"
+                >
+                  Methodology
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/about"
+                  className="hover:text-primary transition-colors"
+                >
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/cities/digital-nomad-guide-bali"
                   className="hover:text-primary transition-colors"
                 >
@@ -69,6 +85,22 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-semibold mb-4">Resources</h3>
             <ul className="space-y-2">
+              <li>
+                <Link
+                  href="/nomadpointe-vs-numbeo"
+                  className="hover:text-primary transition-colors"
+                >
+                  NomadPointe vs Numbeo
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/how-to-interpret-cost-of-living-data"
+                  className="hover:text-primary transition-colors"
+                >
+                  How to interpret cost of living data
+                </Link>
+              </li>
               <li>
                 <a
                   href={getSafetyWingUrl("nomadInsurance", { source: "footer" })}
@@ -112,6 +144,12 @@ export default function Footer() {
             >
               Contact
             </Link>
+              <Link
+                href="/about"
+                className="text-gray-400 hover:text-primary text-sm transition-colors"
+              >
+                About
+              </Link>
             <Link
               href="/privacy"
               className="text-gray-400 hover:text-primary text-sm transition-colors"
@@ -128,9 +166,14 @@ export default function Footer() {
           
           {/* Bottom Bar */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-gray-400 text-sm">
-              © {currentYear} NomadPoint. All rights reserved.
-            </p>
+            <div className="text-center md:text-left">
+              <p className="text-gray-400 text-sm">
+                © {currentYear} NomadPointe. All rights reserved.
+              </p>
+              <p className="text-gray-500 text-xs mt-1">
+                NomadPointe data may be referenced and cited with attribution.
+              </p>
+            </div>
             <p className="text-gray-400 text-sm flex items-center gap-1">
               Made with <Heart className="w-4 h-4 text-red-500 fill-current" /> for
               digital nomads worldwide

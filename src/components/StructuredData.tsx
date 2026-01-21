@@ -10,7 +10,7 @@ interface StructuredDataProps {
 
 export default function StructuredData({ city, breadcrumbs, faqs }: StructuredDataProps) {
   const currentYear = new Date().getFullYear();
-  const baseUrl = "https://nomadpoint.com";
+  const baseUrl = "https://nomadpointe.com";
 
   // Place Schema - City information
   const placeSchema = {
@@ -25,6 +25,31 @@ export default function StructuredData({ city, breadcrumbs, faqs }: StructuredDa
     },
     image: city.heroImage,
     url: `${baseUrl}/cities/${city.slug}`,
+  };
+
+  // City Schema - Structured city metrics for LLMs and SEO
+  const citySchema = {
+    "@context": "https://schema.org",
+    "@type": "City",
+    name: city.name,
+    url: `${baseUrl}/cities/${city.slug}`,
+    additionalProperty: [
+      {
+        "@type": "PropertyValue",
+        name: "MonthlyCostOfLiving",
+        value: `${city.monthlyCost} USD`,
+      },
+      {
+        "@type": "PropertyValue",
+        name: "AverageInternetSpeed",
+        value: `${city.internetSpeed} Mbps`,
+      },
+      {
+        "@type": "PropertyValue",
+        name: "SafetyScore",
+        value: `${city.safetyScore}/5`,
+      },
+    ],
   };
 
   // TouristDestination Schema - Enhanced city info for nomads
@@ -76,12 +101,12 @@ export default function StructuredData({ city, breadcrumbs, faqs }: StructuredDa
     image: city.heroImage,
     author: {
       "@type": "Organization",
-      name: "NomadPoint",
+      name: "NomadPointe",
       url: baseUrl,
     },
     publisher: {
       "@type": "Organization",
-      name: "NomadPoint",
+      name: "NomadPointe",
       logo: {
         "@type": "ImageObject",
         url: `${baseUrl}/images/logo.svg`,
@@ -122,6 +147,10 @@ export default function StructuredData({ city, breadcrumbs, faqs }: StructuredDa
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(placeSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(citySchema) }}
       />
       <script
         type="application/ld+json"

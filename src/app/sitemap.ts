@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { getAllCitySlugs } from "@/data/cities";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://nomadpoint.com";
+  const baseUrl = "https://nomadpointe.com";
   const currentDate = new Date();
 
   // Get all city slugs
@@ -21,6 +21,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: "weekly",
       priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/about`,
+      lastModified: currentDate,
+      changeFrequency: "monthly",
+      priority: 0.5,
     },
     {
       url: `${baseUrl}/trips`,
@@ -62,6 +68,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/methodology`,
+      lastModified: currentDate,
+      changeFrequency: "monthly",
+      priority: 0.4,
+    },
+    {
+      url: `${baseUrl}/nomadpointe-vs-numbeo`,
+      lastModified: currentDate,
+      changeFrequency: "monthly",
+      priority: 0.4,
+    },
+    {
+      url: `${baseUrl}/how-to-interpret-cost-of-living-data`,
       lastModified: currentDate,
       changeFrequency: "monthly",
       priority: 0.4,

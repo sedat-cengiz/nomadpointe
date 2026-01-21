@@ -67,7 +67,7 @@ export function generateCityBreadcrumbs(city: {
 
 // Helper to get full breadcrumb data for structured data
 export function getBreadcrumbStructuredData(items: BreadcrumbItem[]): { name: string; url: string }[] {
-  const baseUrl = "https://nomadpoint.com";
+  const baseUrl = "https://nomadpointe.com";
   return [
     { name: "Home", url: baseUrl },
     ...items.map((item) => ({

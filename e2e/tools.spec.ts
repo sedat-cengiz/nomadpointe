@@ -16,8 +16,8 @@ test.describe("Currency Converter Tool", () => {
 
   test("should have currency selectors", async ({ page }) => {
     // Should have From and To selectors
-    await expect(page.getByText("From")).toBeVisible();
-    await expect(page.getByText("To")).toBeVisible();
+    await expect(page.getByText("From", { exact: true })).toBeVisible();
+    await expect(page.getByText("To", { exact: true })).toBeVisible();
   });
 
   test("should convert currencies", async ({ page }) => {
@@ -47,7 +47,7 @@ test.describe("Currency Converter Tool", () => {
 
   test("should show quick presets", async ({ page }) => {
     await expect(page.getByText(/Daily Budget/i)).toBeVisible();
-    await expect(page.getByText(/Monthly/i)).toBeVisible();
+    await expect(page.getByRole("button", { name: /Monthly/i }).first()).toBeVisible();
   });
 });
 
@@ -62,7 +62,7 @@ test.describe("Timezone Tool", () => {
 
   test("should show timezone information", async ({ page }) => {
     // Should display timezone-related content
-    await expect(page.getByText(/UTC/)).toBeVisible();
+    await expect(page.getByText(/UTC[+-]/).first()).toBeVisible();
   });
 });
 

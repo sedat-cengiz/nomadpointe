@@ -163,7 +163,7 @@ export default function TimezonePlannerPage() {
                 This tool helps you coordinate across multiple time zones by showing current local times and highlighting overlapping working hours (9 AM–6 PM).
               </p>
               <p className="text-sm text-gray-600 mt-2">
-                Canonical URL: <span className="font-medium">nomadpoint.com/tools/timezone</span>. Methodology:{" "}
+                Canonical URL: <span className="font-medium">nomadpointe.com/tools/timezone</span>. Methodology:{" "}
                 <a className="text-primary hover:underline font-medium" href="/methodology">
                   Methodology & Data Sources
                 </a>

@@ -28,12 +28,12 @@ export async function sendEmail({ to, subject, html, text, replyTo }: SendEmailO
 
   // IMPORTANT:
   // Resend requires a verified sender domain unless you use their default sender.
-  // Set RESEND_FROM in env once your domain is verified (e.g. "NomadPoint <noreply@yourdomain.com>").
+  // Set RESEND_FROM in env once your domain is verified (e.g. "NomadPointe <noreply@yourdomain.com>").
   // Until then, default to "onboarding@resend.dev" to avoid "invalid_from_address" errors.
   const from =
     process.env.RESEND_FROM ||
     process.env.EMAIL_FROM ||
-    "NomadPoint <onboarding@resend.dev>";
+    "NomadPointe <onboarding@resend.dev>";
 
   try {
     const { data, error } = await client.emails.send({
@@ -60,7 +60,7 @@ export async function sendEmail({ to, subject, html, text, replyTo }: SendEmailO
 // Email templates
 export const emailTemplates = {
   welcome: (name: string) => ({
-    subject: "Welcome to NomadPoint! 🌍",
+    subject: "Welcome to NomadPointe! 🌍",
     html: `
       <!DOCTYPE html>
       <html>
@@ -78,11 +78,11 @@ export const emailTemplates = {
         <body>
           <div class="container">
             <div class="header">
-              <div class="logo">🌍 NomadPoint</div>
+              <div class="logo">🌍 NomadPointe</div>
             </div>
             <div class="content">
               <h1 style="color: #111827; margin-top: 0;">Welcome, ${name}! 👋</h1>
-              <p>Thanks for joining NomadPoint! We're excited to help you discover your next remote work destination.</p>
+              <p>Thanks for joining NomadPointe! We're excited to help you discover your next remote work destination.</p>
               <p>Here's what you can do:</p>
               <ul>
                 <li>🏙️ <strong>Explore Cities</strong> - Compare 100+ destinations worldwide</li>
@@ -91,12 +91,12 @@ export const emailTemplates = {
                 <li>📋 <strong>Track Progress</strong> - Use checklists for visa & packing</li>
               </ul>
               <p style="margin-top: 30px;">
-                <a href="https://nomadpoint.com/dashboard" class="button">Go to Dashboard</a>
+                <a href="https://nomadpointe.com/dashboard" class="button">Go to Dashboard</a>
               </p>
             </div>
             <div class="footer">
-              <p>You're receiving this because you signed up for NomadPoint.</p>
-              <p>© ${new Date().getFullYear()} NomadPoint. All rights reserved.</p>
+              <p>You're receiving this because you signed up for NomadPointe.</p>
+              <p>© ${new Date().getFullYear()} NomadPointe. All rights reserved.</p>
             </div>
           </div>
         </body>
@@ -124,7 +124,7 @@ export const emailTemplates = {
         <body>
           <div class="container">
             <div class="header">
-              <div class="logo">🌍 NomadPoint</div>
+              <div class="logo">🌍 NomadPointe</div>
             </div>
             <div class="content">
               <div class="countdown">${daysUntil}</div>
@@ -138,12 +138,12 @@ export const emailTemplates = {
                 <li>✈️ Have your flight details ready</li>
               </ul>
               <p style="margin-top: 30px; text-align: center;">
-                <a href="https://nomadpoint.com/trips" class="button">View Trip Details</a>
+                <a href="https://nomadpointe.com/trips" class="button">View Trip Details</a>
               </p>
             </div>
             <div class="footer">
               <p>Have a great trip! 🎉</p>
-              <p>© ${new Date().getFullYear()} NomadPoint. All rights reserved.</p>
+              <p>© ${new Date().getFullYear()} NomadPointe. All rights reserved.</p>
             </div>
           </div>
         </body>
@@ -152,7 +152,7 @@ export const emailTemplates = {
   }),
 
   weeklyDigest: (userName: string, stats: { favorites: number; trips: number }) => ({
-    subject: "📊 Your Weekly NomadPoint Digest",
+    subject: "📊 Your Weekly NomadPointe Digest",
     html: `
       <!DOCTYPE html>
       <html>
@@ -174,11 +174,11 @@ export const emailTemplates = {
         <body>
           <div class="container">
             <div class="header">
-              <div class="logo">🌍 NomadPoint</div>
+              <div class="logo">🌍 NomadPointe</div>
             </div>
             <div class="content">
               <h1 style="color: #111827; margin-top: 0;">Hey ${userName}! 👋</h1>
-              <p>Here's your weekly NomadPoint summary:</p>
+              <p>Here's your weekly NomadPointe summary:</p>
               
               <div class="stats">
                 <div class="stat">
@@ -193,13 +193,13 @@ export const emailTemplates = {
               
               <p>Keep exploring and planning your next adventure!</p>
               <p style="margin-top: 30px; text-align: center;">
-                <a href="https://nomadpoint.com" class="button">Explore New Cities</a>
+                <a href="https://nomadpointe.com" class="button">Explore New Cities</a>
               </p>
             </div>
             <div class="footer">
-              <p>You're receiving this weekly digest from NomadPoint.</p>
-              <p><a href="https://nomadpoint.com/profile">Manage email preferences</a></p>
-              <p>© ${new Date().getFullYear()} NomadPoint. All rights reserved.</p>
+              <p>You're receiving this weekly digest from NomadPointe.</p>
+              <p><a href="https://nomadpointe.com/profile">Manage email preferences</a></p>
+              <p>© ${new Date().getFullYear()} NomadPointe. All rights reserved.</p>
             </div>
           </div>
         </body>

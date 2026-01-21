@@ -49,16 +49,20 @@ test.describe("Home Page", () => {
     await page.waitForTimeout(500);
     
     // Should show Lisbon in results
-    await expect(page.getByText("Lisbon")).toBeVisible();
+    await expect(
+      page.locator('main a[href="/cities/digital-nomad-guide-lisbon"]').first()
+    ).toBeVisible();
   });
 
   test("should navigate to city detail page", async ({ page }) => {
-    // Click on first city card
-    const firstCityLink = page.locator('[href^="/cities/"]').first();
-    await firstCityLink.click();
+    // Wait for city cards to load, then click the first city card title (stable click target)
+    await page.waitForSelector('main a[href^="/cities/"] h3', { timeout: 10000 });
+    const firstCityTitle = page.locator('main a[href^="/cities/"] h3').first();
+    await firstCityTitle.scrollIntoViewIfNeeded();
+    await firstCityTitle.click();
     
     // Should navigate to city page
-    await expect(page).toHaveURL(/\/cities\//);
+    await expect(page).toHaveURL(/\/cities\//, { timeout: 10000 });
   });
 
   test("should add city to compare", async ({ page }) => {
@@ -66,8 +70,10 @@ test.describe("Home Page", () => {
     const compareButton = page.getByTitle("Add to compare").first();
     await compareButton.click();
     
-    // Compare count should appear in header or floating button
-    await expect(page.getByText(/Compare.*1/i)).toBeVisible({ timeout: 5000 });
+    // Compare count should appear in the floating button (works on all viewports)
+    await expect(page.getByRole("link", { name: /Compare\s*1\s*City/i })).toBeVisible({
+      timeout: 5000,
+    });
   });
 
   test("should show filter options", async ({ page }) => {

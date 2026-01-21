@@ -110,7 +110,7 @@ export default function CommunityLinks({ city }: CommunityLinksProps) {
       </div>
 
       <p className="text-xs text-gray-400 mt-4 text-center">
-        Community links are provided for convenience. NomadPoint is not
+        Community links are provided for convenience. NomadPointe is not
         affiliated with these groups.
       </p>
     </div>

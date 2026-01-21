@@ -60,6 +60,22 @@ const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   compress: true,
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "nomadpoint.com" }],
+        destination: "https://nomadpointe.com/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.nomadpoint.com" }],
+        destination: "https://nomadpointe.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = withBundleAnalyzer(nextConfig);

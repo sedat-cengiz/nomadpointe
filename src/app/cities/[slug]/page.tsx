@@ -25,6 +25,7 @@ import StructuredData from "@/components/StructuredData";
 import CityFAQ from "@/components/CityFAQ";
 import { generateCityFAQs } from "@/lib/cityFaq";
 import SimilarCities from "@/components/SimilarCities";
+import CityDataCard from "@/components/CityDataCard";
 import { getCityBySlug, getAllCitySlugs } from "@/data/cities";
 
 interface PageProps {
@@ -52,7 +53,7 @@ export async function generateMetadata({
   const currentYear = new Date().getFullYear();
   const coworkingCount = city.coworkingSpaces?.length || 0;
   const bestMonthsPreview = city.bestMonths.slice(0, 4).join(", ");
-  const canonicalUrl = `https://nomadpoint.com/cities/${city.slug}`;
+  const canonicalUrl = `https://nomadpointe.com/cities/${city.slug}`;
 
   // SEO-optimized title with year and high-value keywords
   const title = `${city.name} Digital Nomad Guide ${currentYear} - Cost of Living & Top Coworking Spaces`;
@@ -84,7 +85,7 @@ export async function generateMetadata({
       `work from ${city.name}`,
     ],
     openGraph: {
-      title: `${city.name} Digital Nomad Guide ${currentYear} | NomadPoint`,
+      title: `${city.name} Digital Nomad Guide ${currentYear} | NomadPointe`,
       description: ogDescription,
       url: canonicalUrl,
       images: [
@@ -98,7 +99,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: `${city.name} Digital Nomad Guide ${currentYear} | NomadPoint`,
+      title: `${city.name} Digital Nomad Guide ${currentYear} | NomadPointe`,
       description: ogDescription,
       images: [city.heroImage],
     },
@@ -222,6 +223,12 @@ export default function CityPage({ params }: PageProps) {
                   <div className="text-lg font-semibold text-gray-900">{city.safetyScore}/5</div>
                 </li>
                 <li className="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                  <div className="text-gray-500">Nomad score</div>
+                  <div className="text-lg font-semibold text-gray-900">
+                    {city.nomadScore ?? "Not specified"}
+                  </div>
+                </li>
+                <li className="bg-gray-50 rounded-xl p-4 border border-gray-100">
                   <div className="text-gray-500">Nomad visa</div>
                   <div className="text-lg font-semibold text-gray-900">{city.visaAvailable ? "Available" : "Not available"}</div>
                 </li>
@@ -299,6 +306,9 @@ export default function CityPage({ params }: PageProps) {
 
                 {/* Similar Cities - Internal Linking for SEO */}
                 <SimilarCities currentCity={city} />
+
+                {/* City data card (LLM-friendly) */}
+                <CityDataCard city={city} />
               </div>
 
               {/* Sidebar - Right Column */}
