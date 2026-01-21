@@ -52,6 +52,7 @@ export async function generateMetadata({
   const currentYear = new Date().getFullYear();
   const coworkingCount = city.coworkingSpaces?.length || 0;
   const bestMonthsPreview = city.bestMonths.slice(0, 4).join(", ");
+  const canonicalUrl = `https://nomadpoint.com/cities/${city.slug}`;
 
   // SEO-optimized title with year and high-value keywords
   const title = `${city.name} Digital Nomad Guide ${currentYear} - Cost of Living & Top Coworking Spaces`;
@@ -65,6 +66,9 @@ export async function generateMetadata({
   return {
     title,
     description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     keywords: [
       `${city.name} digital nomad`,
       `${city.name} digital nomad ${currentYear}`,
@@ -82,6 +86,7 @@ export async function generateMetadata({
     openGraph: {
       title: `${city.name} Digital Nomad Guide ${currentYear} | NomadPoint`,
       description: ogDescription,
+      url: canonicalUrl,
       images: [
         {
           url: city.heroImage,
@@ -113,6 +118,7 @@ export default function CityPage({ params }: PageProps) {
   
   // Generate FAQ data for the FAQ component and structured data
   const faqData = generateCityFAQs(city);
+  const lastUpdated = city.lastUpdated ? new Date(city.lastUpdated) : null;
 
   return (
     <>
@@ -176,6 +182,64 @@ export default function CityPage({ params }: PageProps) {
         {/* Content */}
         <section className="py-12 lg:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* GEO: cite-ready summary */}
+            <section className="mb-8 bg-white rounded-2xl border border-gray-100 p-6 md:p-8">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div>
+                  <h2 className="text-xl font-bold text-gray-900">
+                    TL;DR (Quick Facts)
+                  </h2>
+                  <p className="text-gray-600 mt-2">
+                    {city.name} is a remote-work destination in {city.country}. Below is a fast, cite-ready snapshot of the most important metrics.
+                  </p>
+                </div>
+                <div className="text-sm text-gray-500 md:text-right">
+                  {lastUpdated ? (
+                    <div>
+                      <div className="font-medium text-gray-700">Last updated</div>
+                      <div>{lastUpdated.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}</div>
+                    </div>
+                  ) : (
+                    <div>
+                      <div className="font-medium text-gray-700">Last updated</div>
+                      <div>Not specified</div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <ul className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
+                <li className="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                  <div className="text-gray-500">Monthly cost (estimate)</div>
+                  <div className="text-lg font-semibold text-gray-900">${city.monthlyCost.toLocaleString("en-US")}</div>
+                </li>
+                <li className="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                  <div className="text-gray-500">Internet speed</div>
+                  <div className="text-lg font-semibold text-gray-900">{city.internetSpeed}+ Mbps</div>
+                </li>
+                <li className="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                  <div className="text-gray-500">Safety</div>
+                  <div className="text-lg font-semibold text-gray-900">{city.safetyScore}/5</div>
+                </li>
+                <li className="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                  <div className="text-gray-500">Nomad visa</div>
+                  <div className="text-lg font-semibold text-gray-900">{city.visaAvailable ? "Available" : "Not available"}</div>
+                </li>
+                <li className="bg-gray-50 rounded-xl p-4 border border-gray-100 sm:col-span-2 lg:col-span-2">
+                  <div className="text-gray-500">Best months</div>
+                  <div className="text-lg font-semibold text-gray-900">{city.bestMonths.join(", ")}</div>
+                </li>
+              </ul>
+
+              <div className="mt-5 text-sm text-gray-600">
+                For methodology and data sourcing, see{" "}
+                <a className="text-primary hover:underline font-medium" href="/methodology">
+                  Methodology & Data Sources
+                </a>
+                .
+              </div>
+            </section>
+
             {/* Breadcrumb Navigation */}
             <Breadcrumb items={breadcrumbItems} />
 

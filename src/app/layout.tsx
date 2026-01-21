@@ -33,7 +33,7 @@ export const metadata: Metadata = {
       "Discover the best cities for digital nomads. Compare internet speeds, cost of living, visa options, and more.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/images/og-image.svg",
         width: 1200,
         height: 630,
         alt: "NomadPoint - Digital Nomad City Guide",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     title: "NomadPoint - Find Your Next Remote Work Hub",
     description:
       "Discover the best cities for digital nomads. Compare internet speeds, cost of living, visa options, and more.",
-    images: ["/og-image.jpg"],
+    images: ["/images/og-image.svg"],
   },
   robots: {
     index: true,
@@ -65,8 +65,41 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const baseUrl = "https://nomadpoint.com";
+
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "NomadPoint",
+    url: baseUrl,
+    logo: `${baseUrl}/images/logo.svg`,
+  };
+
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "NomadPoint",
+    url: baseUrl,
+    publisher: {
+      "@type": "Organization",
+      name: "NomadPoint",
+      url: baseUrl,
+      logo: `${baseUrl}/images/logo.svg`,
+    },
+  };
+
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+      </head>
       <body className="min-h-screen flex flex-col">
         <GoogleAnalytics />
         <AuthProvider>{children}</AuthProvider>

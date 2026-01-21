@@ -84,7 +84,7 @@ export default function StructuredData({ city, breadcrumbs, faqs }: StructuredDa
       name: "NomadPoint",
       logo: {
         "@type": "ImageObject",
-        url: `${baseUrl}/images/logo.png`,
+        url: `${baseUrl}/images/logo.svg`,
       },
     },
     datePublished: city.lastUpdated || new Date().toISOString(),

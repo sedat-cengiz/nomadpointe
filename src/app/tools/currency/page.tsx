@@ -135,6 +135,23 @@ export default function CurrencyConverterPage() {
         {/* Converter */}
         <section className="py-12">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* GEO: cite-ready summary */}
+            <div className="mb-6 bg-white rounded-2xl border border-gray-100 p-6">
+              <h2 className="text-lg font-semibold text-gray-900">
+                Quick answer
+              </h2>
+              <p className="text-sm text-gray-600 mt-2">
+                This tool converts an amount from one currency to another using exchange rates. It’s meant for fast budgeting (daily, weekly, monthly) when planning a remote-work destination.
+              </p>
+              <p className="text-sm text-gray-600 mt-2">
+                Canonical URL: <span className="font-medium">nomadpoint.com/tools/currency</span>. Methodology:{" "}
+                <a className="text-primary hover:underline font-medium" href="/methodology">
+                  Methodology & Data Sources
+                </a>
+                .
+              </p>
+            </div>
+
             <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
               <div className="p-8">
                 {/* Main Converter */}

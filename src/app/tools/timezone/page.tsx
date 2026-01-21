@@ -154,6 +154,23 @@ export default function TimezonePlannerPage() {
         {/* Main Content */}
         <section className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* GEO: cite-ready summary */}
+            <div className="mb-8 bg-white rounded-2xl border border-gray-100 p-6">
+              <h2 className="text-lg font-semibold text-gray-900">
+                Quick answer
+              </h2>
+              <p className="text-sm text-gray-600 mt-2">
+                This tool helps you coordinate across multiple time zones by showing current local times and highlighting overlapping working hours (9 AM–6 PM).
+              </p>
+              <p className="text-sm text-gray-600 mt-2">
+                Canonical URL: <span className="font-medium">nomadpoint.com/tools/timezone</span>. Methodology:{" "}
+                <a className="text-primary hover:underline font-medium" href="/methodology">
+                  Methodology & Data Sources
+                </a>
+                .
+              </p>
+            </div>
+
             {/* Selected Cities */}
             <div className="bg-white rounded-2xl border border-gray-100 p-6 mb-8">
               <div className="flex items-center justify-between mb-6">
