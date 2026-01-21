@@ -62,12 +62,8 @@ const nextConfig = {
   compress: true,
   async redirects() {
     return [
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.nomadpointe.com" }],
-        destination: "https://nomadpointe.com/:path*",
-        permanent: true,
-      },
+      // Note: www.nomadpointe.com → nomadpointe.com redirect is handled by Vercel Domains settings
+      // Set nomadpointe.com as primary domain in Vercel Dashboard → Settings → Domains
       {
         source: "/:path*",
         has: [{ type: "host", value: "nomadpoint.com" }],
