@@ -2,9 +2,9 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /admin/
-Disallow: /dashboard
-Disallow: /profile
-Disallow: /login
+Disallow: /dashboard/
+Disallow: /profile/
+Disallow: /login/
 Disallow: /trips/
 
 Sitemap: https://nomadpointe.com/sitemap.xml

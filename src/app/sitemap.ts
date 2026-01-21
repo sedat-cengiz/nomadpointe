@@ -2,11 +2,19 @@ import { MetadataRoute } from "next";
 import { getAllCitySlugs } from "@/data/cities";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://nomadpointe.com";
   const currentDate = new Date();
+  const baseUrl = (
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    process.env.NEXTAUTH_URL ||
+    "https://nomadpointe.com"
+  ).replace(/\/$/, "");
 
   // Get all city slugs
   const citySlugs = getAllCitySlugs();
+
+  // Exclude areas that are intentionally non-indexable (auth/protected/planner flows)
+  // Note: we keep the sitemap strict to avoid GSC "URL not allowed" / "redirect page" noise.
+  const excludedPathPrefixes = ["/trips", "/dashboard", "/profile", "/login"];
 
   // Static pages - Main navigation
   const staticPages: MetadataRoute.Sitemap = [
@@ -29,10 +37,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     },
     {
-      url: `${baseUrl}/trips`,
+      url: `${baseUrl}/contact`,
       lastModified: currentDate,
-      changeFrequency: "weekly",
-      priority: 0.8,
+      changeFrequency: "monthly",
+      priority: 0.4,
     },
   ];
 
@@ -94,6 +102,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  return [...staticPages, ...toolPages, ...legalPages, ...cityPages];
+  const all = [...staticPages, ...toolPages, ...legalPages, ...cityPages];
+
+  return all.filter(
+    (entry) =>
+      !excludedPathPrefixes.some((prefix) =>
+        new URL(entry.url).pathname.startsWith(prefix)
+      )
+  );
 }
 

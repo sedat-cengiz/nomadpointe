@@ -4,7 +4,12 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 import AuthProvider from "@/components/providers/AuthProvider";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://nomadpointe.com"),
+  metadataBase: new URL(
+    (process.env.NEXT_PUBLIC_SITE_URL ||
+      process.env.NEXTAUTH_URL ||
+      "https://nomadpointe.com"
+    ).replace(/\/$/, "")
+  ),
   title: {
     default: "NomadPointe - Find Your Next Remote Work Hub",
     template: "%s | NomadPointe",
@@ -65,7 +70,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const baseUrl = "https://nomadpointe.com";
+  const baseUrl = (
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    process.env.NEXTAUTH_URL ||
+    "https://nomadpointe.com"
+  ).replace(/\/$/, "");
 
   const organizationJsonLd = {
     "@context": "https://schema.org",

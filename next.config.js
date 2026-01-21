@@ -64,6 +64,12 @@ const nextConfig = {
     return [
       {
         source: "/:path*",
+        has: [{ type: "host", value: "www.nomadpointe.com" }],
+        destination: "https://nomadpointe.com/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
         has: [{ type: "host", value: "nomadpoint.com" }],
         destination: "https://nomadpointe.com/:path*",
         permanent: true,
