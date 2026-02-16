@@ -19,7 +19,7 @@ export default function Footer() {
                 Nomad<span className="text-primary">Pointe</span>
               </span>
             </Link>
-            <p className="text-gray-400 max-w-md">
+            <p className="text-gray-300 max-w-md">
               Your trusted guide to finding the perfect remote work destination.
               Compare cities, check internet speeds, and plan your next
               adventure.
@@ -140,25 +140,25 @@ export default function Footer() {
           <div className="flex flex-wrap justify-center gap-6 mb-6">
             <Link
               href="/contact"
-              className="text-gray-400 hover:text-primary text-sm transition-colors"
+              className="text-gray-300 hover:text-primary text-sm transition-colors"
             >
               Contact
             </Link>
-              <Link
-                href="/about"
-                className="text-gray-400 hover:text-primary text-sm transition-colors"
-              >
-                About
-              </Link>
+            <Link
+              href="/about"
+              className="text-gray-300 hover:text-primary text-sm transition-colors"
+            >
+              About
+            </Link>
             <Link
               href="/privacy"
-              className="text-gray-400 hover:text-primary text-sm transition-colors"
+              className="text-gray-300 hover:text-primary text-sm transition-colors"
             >
               Privacy Policy
             </Link>
             <Link
               href="/affiliate-disclosure"
-              className="text-gray-400 hover:text-primary text-sm transition-colors"
+              className="text-gray-300 hover:text-primary text-sm transition-colors"
             >
               Affiliate Disclosure
             </Link>
@@ -167,14 +167,14 @@ export default function Footer() {
           {/* Bottom Bar */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="text-center md:text-left">
-              <p className="text-gray-400 text-sm">
-                © {currentYear} NomadPointe. All rights reserved.
+              <p className="text-gray-300 text-sm">
+                &copy; {currentYear} NomadPointe. All rights reserved.
               </p>
-              <p className="text-gray-500 text-xs mt-1">
+              <p className="text-gray-400 text-xs mt-1">
                 NomadPointe data may be referenced and cited with attribution.
               </p>
             </div>
-            <p className="text-gray-400 text-sm flex items-center gap-1">
+            <p className="text-gray-300 text-sm flex items-center gap-1">
               Made with <Heart className="w-4 h-4 text-red-500 fill-current" /> for
               digital nomads worldwide
             </p>

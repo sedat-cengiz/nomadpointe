@@ -26,7 +26,10 @@ import CityFAQ from "@/components/CityFAQ";
 import { generateCityFAQs } from "@/lib/cityFaq";
 import SimilarCities from "@/components/SimilarCities";
 import CityDataCard from "@/components/CityDataCard";
+import CityCompareDropdown from "@/components/CityCompareDropdown";
+import CityStickyNav from "@/components/CityStickyNav";
 import { getCityBySlug, getAllCitySlugs } from "@/data/cities";
+import { getCityBestForTags } from "@/lib/cityBestFor";
 
 interface PageProps {
   params: { slug: string };
@@ -120,6 +123,7 @@ export default function CityPage({ params }: PageProps) {
   // Generate FAQ data for the FAQ component and structured data
   const faqData = generateCityFAQs(city);
   const lastUpdated = city.lastUpdated ? new Date(city.lastUpdated) : null;
+  const bestForTags = getCityBestForTags(city);
 
   return (
     <>
@@ -137,11 +141,12 @@ export default function CityPage({ params }: PageProps) {
         <section className="relative h-[40vh] md:h-[50vh] lg:h-[60vh]">
           <Image
             src={city.heroImage}
-            alt={`${city.name}, ${city.country}`}
+            alt={`${city.name}, ${city.country} - Digital Nomad Guide`}
             fill
             className="object-cover"
             priority
             sizes="100vw"
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
 
@@ -165,26 +170,39 @@ export default function CityPage({ params }: PageProps) {
                     {city.name}
                   </h1>
                   <p className="text-xl text-white/80">
-                    {city.country} • {city.continent}
+                    {city.country} &bull; {city.continent}
                   </p>
+                  {/* Best For Tags */}
+                  {bestForTags.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mt-3">
+                      {bestForTags.slice(0, 5).map((tag) => (
+                        <span
+                          key={tag.key}
+                          className="inline-flex items-center gap-1 bg-white/20 backdrop-blur-sm text-white text-xs font-medium px-3 py-1.5 rounded-full"
+                        >
+                          <span>{tag.emoji}</span>
+                          <span>{tag.label}</span>
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
-                <Link
-                  href={`/compare?cities=${city.slug}`}
-                  className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-md text-white px-6 py-3 rounded-xl transition-colors"
-                >
-                  <GitCompare className="w-5 h-5" />
-                  Compare with other cities
-                </Link>
+                <div className="flex flex-col gap-2">
+                  <CityCompareDropdown currentCity={city} />
+                </div>
               </div>
             </div>
           </div>
         </section>
 
+        {/* Sticky Section Navigation */}
+        <CityStickyNav />
+
         {/* Content */}
         <section className="py-12 lg:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* GEO: cite-ready summary */}
-            <section className="mb-8 bg-white rounded-2xl border border-gray-100 p-6 md:p-8">
+            <section id="section-overview" className="mb-8 bg-white rounded-2xl border border-gray-100 p-6 md:p-8 scroll-mt-28">
               <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                 <div>
                   <h2 className="text-xl font-bold text-gray-900">
@@ -194,20 +212,36 @@ export default function CityPage({ params }: PageProps) {
                     {city.name} is a remote-work destination in {city.country}. Below is a fast, cite-ready snapshot of the most important metrics.
                   </p>
                 </div>
-                <div className="text-sm text-gray-500 md:text-right">
+                <div className="text-sm text-gray-500 md:text-right flex-shrink-0">
                   {lastUpdated ? (
-                    <div>
-                      <div className="font-medium text-gray-700">Last updated</div>
-                      <div>{lastUpdated.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}</div>
+                    <div className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-full border border-emerald-200">
+                      <span className="font-medium">Updated:</span>
+                      <span>{lastUpdated.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}</span>
                     </div>
                   ) : (
-                    <div>
-                      <div className="font-medium text-gray-700">Last updated</div>
-                      <div>Not specified</div>
+                    <div className="inline-flex items-center gap-2 bg-gray-50 text-gray-500 px-3 py-1.5 rounded-full border border-gray-200">
+                      <span className="font-medium">Updated:</span>
+                      <span>Not specified</span>
                     </div>
                   )}
                 </div>
               </div>
+
+              {/* Best For Tags - inline in TL;DR for AI visibility */}
+              {bestForTags.length > 0 && (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <span className="text-sm font-medium text-gray-700">Best for:</span>
+                  {bestForTags.map((tag) => (
+                    <span
+                      key={tag.key}
+                      className="inline-flex items-center gap-1 bg-primary/5 text-primary text-xs font-medium px-3 py-1.5 rounded-full border border-primary/20"
+                    >
+                      <span>{tag.emoji}</span>
+                      <span>{tag.label}</span>
+                    </span>
+                  ))}
+                </div>
+              )}
 
               <ul className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
                 <li className="bg-gray-50 rounded-xl p-4 border border-gray-100">
@@ -241,7 +275,7 @@ export default function CityPage({ params }: PageProps) {
               <div className="mt-5 text-sm text-gray-600">
                 For methodology and data sourcing, see{" "}
                 <a className="text-primary hover:underline font-medium" href="/methodology">
-                  Methodology & Data Sources
+                  Methodology &amp; Data Sources
                 </a>
                 .
               </div>
@@ -272,7 +306,9 @@ export default function CityPage({ params }: PageProps) {
                 </div>
 
                 {/* Where to stay (data-driven) */}
-                <WhereToStay city={city} />
+                <div id="section-cost" className="scroll-mt-28">
+                  <WhereToStay city={city} />
+                </div>
 
                 {/* Visa & Legal Information */}
                 <VisaDetails city={city} />
@@ -281,7 +317,9 @@ export default function CityPage({ params }: PageProps) {
                 <PracticalInfo city={city} />
 
                 {/* Health & Safety */}
-                <HealthInfo city={city} />
+                <div id="section-safety" className="scroll-mt-28">
+                  <HealthInfo city={city} />
+                </div>
 
                 {/* Finance & Banking */}
                 <FinanceInfo city={city} />
@@ -293,7 +331,9 @@ export default function CityPage({ params }: PageProps) {
                 <FoodGuide city={city} />
 
                 {/* Community Reviews */}
-                <CommunityReviews city={city} />
+                <div id="section-coworking" className="scroll-mt-28">
+                  <CommunityReviews city={city} />
+                </div>
 
                 {/* Seasonality Tracker */}
                 <SeasonalityTracker city={city} />
@@ -302,7 +342,9 @@ export default function CityPage({ params }: PageProps) {
                 <CityFAQ city={city} />
 
                 {/* Community Links */}
-                <CommunityLinks city={city} />
+                <div id="section-community" className="scroll-mt-28">
+                  <CommunityLinks city={city} />
+                </div>
 
                 {/* Similar Cities - Internal Linking for SEO */}
                 <SimilarCities currentCity={city} />
